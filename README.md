@@ -136,11 +136,19 @@ echo ".env" >> .gitignore
 docker-compose -f windows10.yml up
 ```
 
-### Reinicio manual
+# 🔌 Apagar la PC (detener el contenedor)
+bash
+Copiar
+Editar
+docker stop windows
+Esto apaga el contenedor llamado windows, equivalente a apagar la PC.
 
-```bash
-docker start windows
-```
+# 🔁 Reiniciar la PC
+bash
+Copiar
+Editar
+docker restart windows
+Esto primero lo apaga y luego lo vuelve a encender.
 
 ---
 
