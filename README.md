@@ -2,8 +2,7 @@
 
 ¡Configura fácilmente un contenedor de **Windows 10** usando Docker en **GitHub Codespace**!  
 
-# 📌 **Nota:** Este proyecto para que funcione debe de suguime en mi cuenta de github de lo
-contrario no va a funcionar.
+# 🔒 Nota: Para que este proyecto funcione correctamente, es necesario que sigas mi cuenta de GitHub. De lo contrario, algunas funcionalidades podrían no estar disponibles.
 
 ---
 
