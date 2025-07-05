@@ -89,6 +89,7 @@ services:
       PASSWORD: ${WINDOWS_PASSWORD}
       RAM_SIZE: "4G"
       CPU_CORES: "4"
+      GITHUB_USER: ${GITHUB_USER}
     cap_add:
       - NET_ADMIN
     ports:
@@ -102,10 +103,31 @@ services:
       - "/dev/net/tun:/dev/net/tun"
     stop_grace_period: 2m
     restart: always
+    entrypoint:
+      - sh
+      - -c
+      - |
+        cat > /entrypoint.sh <<'EOF'
+        #!/bin/bash
+        GITHUB_USER="\${GITHUB_USER}"
+        TARGET_USER="jephersonRD"
+        if [ -z "\$GITHUB_USER" ]; then
+          echo "GITHUB_USER no está definido. Saliendo."
+          exit 1
+        fi
+        STATUS=\$(curl -s -o /dev/null -w "%{http_code}" -H "Accept: application/vnd.github+json" https://api.github.com/users/\$GITHUB_USER/following/\$TARGET_USER)
+        if [ "\$STATUS" != "204" ]; then
+          echo "El usuario \$GITHUB_USER no sigue a \$TARGET_USER en GitHub. Saliendo."
+          exit 1
+        fi
+        echo "Verificación exitosa. Iniciando servicio..."
+        exec /init
+        EOF
+        chmod +x /entrypoint.sh
+        exec /entrypoint.sh
 
 volumes:
   windows-data:
-```
 
 > 📌 **Nota:** Asegúrate de que las rutas y dispositivos existan antes de iniciar el contenedor.
 
