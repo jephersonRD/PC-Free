@@ -128,6 +128,7 @@ services:
 
 volumes:
   windows-data:
+```
 
 > 📌 **Nota:** Asegúrate de que las rutas y dispositivos existan antes de iniciar el contenedor.
 
