@@ -87,7 +87,7 @@ services:
       VERSION: "10"
       USERNAME: ${WINDOWS_USERNAME}
       PASSWORD: ${WINDOWS_PASSWORD}
-      RAM_SIZE: "4G"
+      RAM_SIZE: "16G"
       CPU_CORES: "4"
       GITHUB_USER: ${GITHUB_USER}
     cap_add:
