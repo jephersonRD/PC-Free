@@ -1,3 +1,4 @@
+
 # 🚀✨ PC-Free: Windows 10 en Docker vía GitHub Codespace
 
 ![PC-Free Banner](https://media.giphy.com/media/3o7abB06u9bNzA8lu8/giphy.gif)
@@ -71,7 +72,6 @@ Agrega:
 ```bash
 docker info
 ```
-
 Asegúrate de que `Docker Root Dir` sea `/tmp/docker-data`.
 
 ---
@@ -88,26 +88,26 @@ services:
     container_name: windows
     environment:
       VERSION: "10"
-      USERNAME: ${WINDOWS_USERNAME}   # Usa un archivo .env para variables sensibles
-      PASSWORD: ${WINDOWS_PASSWORD}   # Usa un archivo .env para variables sensibles
+      USERNAME: ${WINDOWS_USERNAME}
+      PASSWORD: ${WINDOWS_PASSWORD}
       RAM_SIZE: "16G"
       CPU_CORES: "4"
     cap_add:
       - NET_ADMIN
     ports:
       - "8006:8006"
-      - "3389:3389/tcp"  # Solo exponemos TCP para RDP
+      - "3389:3389/tcp"
     volumes:
-      - /tmp/docker-data:/mnt/disco1   # Asegúrate de que este directorio exista
-      - windows-data:/mnt/windows-data # Montaje adicional si es necesario
+      - /tmp/docker-data:/mnt/disco1
+      - windows-data:/mnt/windows-data
     devices:
-      - "/dev/kvm:/dev/kvm"  # Solo si realmente necesitas acceso a KVM
-      - "/dev/net/tun:/dev/net/tun"  # Solo si necesitas acceso a interfaces de red virtual
+      - "/dev/kvm:/dev/kvm"
+      - "/dev/net/tun:/dev/net/tun"
     stop_grace_period: 2m
     restart: always
 
 volumes:
-  windows-data: 
+  windows-data:
 ```
 
 ---
@@ -136,19 +136,21 @@ echo ".env" >> .gitignore
 docker-compose -f windows10.yml up
 ```
 
-# 🔌 Apagar la PC (detener el contenedor)
-bash
-Copiar
-Editar
-docker stop windows
-Esto apaga el contenedor llamado windows, equivalente a apagar la PC.
+---
 
-# 🔁 Reiniciar la PC
-bash
-Copiar
-Editar
+## 🔌 Apagar la PC
+
+```bash
+docker stop windows
+```
+
+---
+
+## 🔁 Reiniciar la PC
+
+```bash
 docker restart windows
-Esto primero lo apaga y luego lo vuelve a encender.
+```
 
 ---
 
@@ -175,7 +177,5 @@ docker logs windows
 ## 📜 Licencia
 
 Distribuido bajo la licencia MIT. Consulta el archivo `LICENSE`.
-
----
 
 > ✨ Desarrollado con ❤️ para devs que quieren **una PC completa sin tener una.**
