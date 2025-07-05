@@ -1,55 +1,77 @@
-# PC-Free
+# 🚀 PC-Free: Windows 10 en Docker via Codespace
+
+¡Configura fácilmente un contenedor de **Windows 10** usando Docker en **GitHub Codespace**!  
+Este proyecto te guía paso a paso para levantar un entorno funcional y optimizado.
 
 ---
 
-### Instrucciones para configurar Docker en **Codespace**
+## 📦 Requisitos Previos
 
-1. **Verifica el almacenamiento disponible**  
-   En la terminal, ejecuta el siguiente comando para ver las particiones y el almacenamiento disponible:
-
-   ```bash
-   df -h
-   ```
-
-   Elige la partición con mayor capacidad de almacenamiento.
-
-2. **Crea la carpeta para Docker**  
-   Ejecuta el siguiente comando para crear la carpeta donde Docker almacenará los datos:
-
-   ```bash
-   sudo mkdir -p /tmp/docker-data
-   ```
-
-3. **Configura Docker**  
-   Ahora, edita el archivo de configuración de Docker:
-
-   ```bash
-   sudo nano /etc/docker/daemon.json
-   ```
-
-   Pega el siguiente contenido:
-
-   ```json
-   {
-     "data-root": "/tmp/docker-data"
-   }
-   ```
-
-4. **Reinicia tu Codespace**  
-   Apaga y enciende nuevamente tu Codespace para aplicar los cambios.
-
-5. **Verifica la configuración**  
-   Para asegurarte de que Docker está configurado correctamente, ejecuta:
-
-   ```bash
-   docker info
-   ```
+- GitHub Codespace habilitado
+- Docker instalado y funcionando en el entorno
+- Almacenamiento suficiente
 
 ---
 
-### Crear archivo `windows10.yml`
+## 🛠️ Paso a paso
 
-Crea un archivo llamado `windows10.yml` con el siguiente contenido:
+### 1. Verifica el almacenamiento disponible
+
+En la terminal, ejecuta:
+
+```bash
+df -h
+```
+
+Elige la partición con **mayor capacidad disponible**.
+
+---
+
+### 2. Crea la carpeta de datos para Docker
+
+```bash
+sudo mkdir -p /tmp/docker-data
+```
+
+---
+
+### 3. Configura Docker
+
+Edita el archivo de configuración:
+
+```bash
+sudo nano /etc/docker/daemon.json
+```
+
+Agrega el siguiente contenido:
+
+```json
+{
+  "data-root": "/tmp/docker-data"
+}
+```
+
+---
+
+### 4. Reinicia tu Codespace
+
+Esto aplicará los cambios realizados en Docker.
+
+---
+
+### 5. Verifica que Docker esté configurado
+
+```bash
+docker info
+```
+
+Confirma que el campo `Docker Root Dir` apunte a `/tmp/docker-data`.
+
+---
+
+## ⚙️ Crear el archivo `windows10.yml`
+
+Este archivo define los servicios y configuraciones del contenedor:
 
 ```yaml
 services:
@@ -58,63 +80,81 @@ services:
     container_name: windows
     environment:
       VERSION: "10"
-      USERNAME: ${WINDOWS_USERNAME}   # Usa un archivo .env para variables sensibles
-      PASSWORD: ${WINDOWS_PASSWORD}   # Usa un archivo .env para variables sensibles
+      USERNAME: ${WINDOWS_USERNAME}
+      PASSWORD: ${WINDOWS_PASSWORD}
       RAM_SIZE: "4G"
       CPU_CORES: "4"
     cap_add:
       - NET_ADMIN
     ports:
       - "8006:8006"
-      - "3389:3389/tcp"  # Solo exponemos TCP para RDP
+      - "3389:3389/tcp"
     volumes:
-      - /tmp/docker-data:/mnt/disco1   # Asegúrate de que este directorio exista
-      - windows-data:/mnt/windows-data # Montaje adicional si es necesario
+      - /tmp/docker-data:/mnt/disco1
+      - windows-data:/mnt/windows-data
     devices:
-      - "/dev/kvm:/dev/kvm"  # Solo si realmente necesitas acceso a KVM
-      - "/dev/net/tun:/dev/net/tun"  # Solo si necesitas acceso a interfaces de red virtual
+      - "/dev/kvm:/dev/kvm"
+      - "/dev/net/tun:/dev/net/tun"
     stop_grace_period: 2m
     restart: always
 
 volumes:
-  windows-data:  # Define el volumen en caso de que no exista
-
-
+  windows-data:
 ```
+
+> 📌 **Nota:** Asegúrate de que las rutas y dispositivos existan en tu entorno Codespace antes de iniciar el contenedor.
 
 ---
 
-### Crear archivo `.env`
+## 🔐 Crear archivo `.env`
 
-Crea un archivo `.env` en la misma carpeta donde se encuentra `windows10.yml` para definir las variables de entorno sensibles, como el nombre de usuario y la contraseña:
+Define variables sensibles como nombre de usuario y contraseña de forma segura:
 
 ```ini
 WINDOWS_USERNAME=YourUsername
 WINDOWS_PASSWORD=YourPassword
 ```
 
-Este archivo no debe subirse a repositorios públicos por razones de seguridad. Asegúrate de incluirlo en tu `.gitignore` si estás trabajando con control de versiones.
+> ⚠️ **IMPORTANTE:** No subas este archivo a GitHub. Añádelo a tu `.gitignore`:
+
+```bash
+echo ".env" >> .gitignore
+```
 
 ---
 
-### Levantar el contenedor
+## ▶️ Iniciar el contenedor
 
-1. **Levanta el contenedor** ejecutando el siguiente comando:
+### 1. Levantar contenedor
 
-   ```bash
-   docker-compose -f windows10.yml up
-   ```
+```bash
+docker-compose -f windows10.yml up
+```
 
-2. **Inicia el contenedor** con:
+### 2. Iniciar manualmente (si ya fue creado)
 
-   ```bash
-   docker start windows
-   ```
-
----
-
-¡Y listo! Con estos pasos, habrás configurado correctamente Docker y creado el contenedor de **Windows 10** en tu Codespace. Si tienes más dudas o necesitas asistencia adicional, no dudes en preguntar.
+```bash
+docker start windows
+```
 
 ---
 
-Este archivo ahora refleja los cambios que hicimos en el archivo `docker-compose.yml`, como la gestión de credenciales a través del archivo `.env` y la eliminación de puertos y configuraciones innecesarias. Además, recuerda mantener tus variables de entorno sensibles seguras y fuera del control de versiones.
+## ✅ ¡Listo!
+
+Ahora tienes **Windows 10 corriendo dentro de Docker** en tu Codespace.  
+Si necesitas ayuda o soporte, ¡no dudes en abrir un issue o dejar tus preguntas!
+
+---
+
+## 🧠 Buenas prácticas
+
+- Mantén tus credenciales fuera del repositorio
+- Usa `volumes:` para persistencia de datos
+- Revisa los logs de Docker para resolver problemas (`docker logs windows`)
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT.  
+Consulta el archivo `LICENSE` para más detalles.
