@@ -1,7 +1,9 @@
 # 🚀 PC-Free: Windows 10 en Docker via Codespace
 
 ¡Configura fácilmente un contenedor de **Windows 10** usando Docker en **GitHub Codespace**!  
-Este proyecto te guía paso a paso para levantar un entorno funcional y optimizado.
+
+##📌 **Nota:** Este proyecto para que funcione debe de suguime en mi cuenta de github de lo
+contrario no va a funcionar.
 
 ---
 
