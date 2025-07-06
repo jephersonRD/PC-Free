@@ -151,7 +151,7 @@ docker stop windows
 ```bash
 docker restart windows
 ```
-## ✅ Encender la "PC" otra vez
+## 💡 Encender la "PC" otra vez
 ```bash
 docker start windows
 ```
