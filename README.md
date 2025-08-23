@@ -2,13 +2,12 @@
 
 ## 📸 Capturas de Pantalla del Sistema
 
-### Windows 10 Desktop
-[Ver imagen completa](https://share.google/images/kVtu5KqzCRBffxrXL)
+<div align="center">
+  <img src="./images/windows10-desktop.png" alt="Windows 10 Desktop" width="45%" />
+  <img src="./images/windows11-about.png" alt="Windows 11 About Dialog" width="45%" />
+</div>
 
-### Windows 11 About Dialog  
-[Ver imagen completa](https://share.google/images/CrIeV2psuYSgy8Ap9)
-
-*Screenshots mostrando Windows ejecutándose exitosamente en el navegador*
+*Izquierda: Windows 10 ejecutándose en el navegador | Derecha: Información del sistema Windows*
 
 > **Ejecuta Windows 10 en la nube sin una PC potente.**  
 > Todo directamente desde GitHub Codespace + Docker. 🔥
