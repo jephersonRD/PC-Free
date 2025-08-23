@@ -1,7 +1,14 @@
-
 # 🚀✨ PC-Free: Windows 10 en Docker vía GitHub Codespace
 
-![PC-Free Banner](https://media.giphy.com/media/3o7abB06u9bNzA8lu8/giphy.gif)
+## 📸 Capturas de Pantalla del Sistema
+
+### Windows 10 Desktop
+[Ver imagen completa](https://share.google/images/kVtu5KqzCRBffxrXL)
+
+### Windows 11 About Dialog  
+[Ver imagen completa](https://share.google/images/CrIeV2psuYSgy8Ap9)
+
+*Screenshots mostrando Windows ejecutándose exitosamente en el navegador*
 
 > **Ejecuta Windows 10 en la nube sin una PC potente.**  
 > Todo directamente desde GitHub Codespace + Docker. 🔥
