@@ -7,7 +7,7 @@
   <img src="./images/windows11-about.png" alt="Windows 11 About Dialog" width="45%" />
 </div>
 
-*Izquierda: Windows 10 ejecutándose en el navegador | Derecha: Información del sistema Windows*
+*Windows 10 ejecutándose en el navegador*
 
 > **Ejecuta Windows 10 en la nube sin una PC potente.**  
 > Todo directamente desde GitHub Codespace + Docker. 🔥
