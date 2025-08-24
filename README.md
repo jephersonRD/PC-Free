@@ -96,7 +96,7 @@ services:
       VERSION: "10"
       USERNAME: ${WINDOWS_USERNAME}
       PASSWORD: ${WINDOWS_PASSWORD}
-      RAM_SIZE: "16G"
+      RAM_SIZE: "12G"
       CPU_CORES: "4"
     cap_add:
       - NET_ADMIN
