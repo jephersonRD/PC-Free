@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Preconnect to improve loading performance for external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <!-- SEO Meta Tags -->
+    <title>PC-Free - Run Windows 10 Free in Browser | GitHub Codespaces</title>
+    <meta name="description" content="Run Windows 10 completely free in your browser using Docker and GitHub Codespaces. No installation, no powerful PC required. Deploy in 5 minutes.">
+    <meta name="keywords" content="windows 10 online, free windows cloud, run windows in browser, github codespaces windows, docker windows, windows 10 free, cloud windows desktop, virtual windows free">
+    <meta name="author" content="jephersonRD">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/jephersonRD/pc-free">
+    <meta property="og:title" content="PC-Free - Run Windows 10 Free in Browser">
+    <meta property="og:description" content="Run Windows 10 completely free in your browser using Docker and GitHub Codespaces. No installation required.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/jephersonRD/pc-free/main/images/windows10-desktop.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://github.com/jephersonRD/pc-free">
+    <meta property="twitter:title" content="PC-Free - Run Windows 10 Free in Browser">
+    <meta property="twitter:description" content="Run Windows 10 completely free in your browser using Docker and GitHub Codespaces.">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/jephersonRD/pc-free/main/images/windows10-desktop.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://github.com/jephersonRD/pc-free">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>">
+
+    <!-- Bootstrap Icons -->
+    <!-- Replaced @import in CSS with link for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Schema.org Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PC-Free",
+        "description": "Run Windows 10 completely free in your browser using Docker and GitHub Codespaces",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser, Linux, macOS, Windows",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "jephersonRD"
+        }
+    }
+    </script>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="logo" aria-label="PC-Free Home">
+                <span class="logo-icon">☁️</span>
+                <span class="logo-text">PC-Free</span>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#features" class="nav-link">FEATURES</a>
+                <a href="#comparison" class="nav-link">COMPARISON</a>
+                <a href="#quick-start" class="nav-link">QUICK START</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="https://github.com/jephersonRD/pc-free" target="_blank" class="nav-link">GITHUB</a>
+            </nav>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-text reveal-up">
+                    <h1 class="gradient-text">PC-FREE</h1>
+                    <h2 class="gradient-text hero-subtitle">Run Windows 10 Free in Your Browser</h2>
+                </div>
+                
+                <div class="hero-description reveal-up">
+                    <p>Deploy a complete Windows 10 environment using Docker & GitHub Codespaces. No PC required.</p>
+                </div>
+    
+                <div class="badges reveal-up">
+                    <img src="https://img.shields.io/github/stars/jephersonRD/pc-free?style=social" alt="GitHub stars">
+                    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License">
+                    <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white" alt="Docker">
+                    <img src="https://img.shields.io/badge/Windows-10-0078D6?style=flat&logo=windows&logoColor=white" alt="Windows 10">
+                </div>
+    
+                <div class="cta-buttons reveal-up">
+                    <a href="https://github.com/jephersonRD/pc-free" target="_blank" rel="noopener noreferrer">
+                        <button class="Button1">
+                            <span>Get Started Free</span>
+                        </button>
+                    </a>
+                    <a href="#quick-start">
+                        <button class="Button1">
+                            <span>View Guide</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <div class="browser-frame">
+                    <div class="browser-header">
+                        <div class="dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="address-bar">https://pc-free.github.dev</div>
+                    </div>
+                    <!-- Miniatura del video con enlace a YouTube -->
+                    <a href="https://youtu.be/JiFhZXbz2b8" target="_blank" rel="noopener noreferrer" class="hero-video-container">
+                        <img src="https://img.youtube.com/vi/JiFhZXbz2b8/maxresdefault.jpg" alt="Video Thumbnail: Windows 10 on GitHub Codespaces" class="hero-image">
+                        <div class="play-button-overlay">
+                            <i class="bi bi-play-circle-fill"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section class="brands-section">
+        <h2 class="reveal-up section-title-small">Powered by Leading Technologies</h2>
+        <div class="reveal-up carousel-container">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker Logo">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png" alt="GitHub Logo">
+                </div>
+                <div class="carousel-item">
+                    <svg role="img" aria-label="GitHub Codespaces Logo" viewBox="0 0 609 130" xmlns="http://www.w3.org/2000/svg"><path d="M75.4 23.9h26.5v79.8H75.4V23.9zm41.7 0h28.3l22.8 35.7 23.1-35.7h27.3v79.8h-26.5V59.1l-24.1 37.3h-.6L142.7 59v44.7h-25.6V23.9zm131.4 0c9.1 0 17.2 1.6 24.2 4.9 7 3.3 12.4 7.9 16.3 13.9 3.9 6 5.8 13 5.8 21 0 8-2 15-5.9 21s-9.4 10.6-16.4 13.9c-7 3.3-15 4.9-24.1 4.9h-15.4v23.2h-26.5V23.9h41.9zm-1.6 57.1c6.5 0 11.6-1.6 15.3-4.9 3.7-3.2 5.5-7.8 5.5-13.6s-1.8-10.3-5.5-13.6c-3.7-3.2-8.8-4.9-15.3-4.9h-13.8V81h13.8zm72.3-34.8c4.1-6.6 9.6-11.8 16.4-15.5 6.8-3.7 14.5-5.6 23.1-5.6v27.7h-7.1c-9.8 0-17.3 2.3-22.5 6.9-5.2 4.6-7.8 12.3-7.8 23.1v23.9h-26.5V26.1h26.5v20.1zm59.5-20.1c8.6 0 16.3 1.9 23.1 5.6 6.8 3.7 12.1 8.9 16 15.5 3.9 6.6 5.8 14.1 5.8 22.5s-1.9 15.9-5.8 22.5c-3.9 6.6-9.2 11.8-16 15.5-6.8 3.7-14.5 5.6-23.1 5.6s-16.3-1.9-23.1-5.6c-6.8-3.7-12.1-8.9-16-15.5-3.9-6.6-5.8-14.1-5.8-22.5s1.9-15.9 5.8-22.5c3.9-6.6 9.2-11.8 16-15.5 6.8-3.7 14.5-5.6 23.1-5.6zm0 22.3c-6.3 0-11.4 2.1-15.2 6.2-3.8 4.1-5.8 9.5-5.8 16.2s2 12.1 5.8 16.2c3.8 4.1 8.9 6.2 15.2 6.2s11.4-2.1 15.2-6.2c3.8-4.1 5.8-9.5 5.8-16.2s-2-12.1-5.8-16.2c-3.8-4.1-8.9-6.2-15.2-6.2zm78.3 30.1c.6 4.8 2.8 8.5 6.4 11.2 3.6 2.7 8.1 4 13.4 4 4.1 0 7.6-.8 10.5-2.5 2.9-1.7 4.9-4 5.9-7h25.4c-2.4 9.2-7.4 16.4-15.1 21.6-7.7 5.2-17 7.8-28.1 7.8-8.6 0-16.3-1.8-23-5.4-6.7-3.6-12-8.7-15.7-15.2-3.8-6.5-5.7-14-5.7-22.4 0-8.5 1.9-16 5.6-22.5 3.8-6.5 9-11.6 15.7-15.3 6.7-3.7 14.4-5.5 23.1-5.5 8.5 0 16 1.8 22.5 5.3 6.5 3.5 11.6 8.5 15.3 14.8 3.7 6.4 5.5 13.7 5.5 22 0 2.3-.1 4.5-.4 6.6h-61.3zm35.6-16.7c-.5-4.6-2.6-8.3-6.2-11-3.6-2.7-8-4.1-13.2-4.1-5 0-9.2 1.3-12.7 4-3.5 2.7-5.7 6.4-6.5 11.1h38.6zM607 48.4c3.9-6.6 9.2-11.8 16-15.5 6.8-3.7 14.5-5.6 23.1-5.6s16.3 1.9 23.1 5.6c6.8 3.7 12.1 8.9 16 15.5 3.9 6.6 5.8 14.1 5.8 22.5s-1.9 15.9-5.8 22.5c-3.9 6.6-9.2 11.8-16 15.5-6.8 3.7-14.5 5.6-23.1 5.6s-16.3-1.9-23.1-5.6c-6.8-3.7-12.1-8.9-16-15.5-3.9-6.6-5.8-14.1-5.8-22.5s1.9-15.9 5.8-22.5zm29.8 37.5c3.8 4.1 8.9 6.2 15.2 6.2s11.4-2.1 15.2-6.2c3.8-4.1 5.8-9.5 5.8-16.2s-2-12.1-5.8-16.2c-3.8-4.1-8.9-6.2-15.2-6.2s-11.4 2.1-15.2 6.2c-3.8 4.1-5.8 9.5-5.8 16.2s2 12.1 5.8 16.2z" fill="currentColor"/><path d="m29.9 68.4 19-32.9L29.7 51 10.5 18.6 0 0l29.7 51.4v.1L39 68.4l19.2 33.2L77.4 68.4 58.2 35.5l-.2-.4L29.9 0 10.5 35.5l.1.1L0 51.5l29.9 51.4L39 85.7z" fill="#00adef"/></svg>
+                <div class="carousel-item">
+                    <svg role="img" aria-label="GitHub Codespaces Logo" viewBox="0 0 609 130" xmlns="http://www.w3.org/2000/svg"><path d="M75.4 23.9h26.5v79.8H75.4V23.9zm41.7 0h28.3l22.8 35.7 23.1-35.7h27.3v79.8h-26.5V59.1l-24.1 37.3h-.6L142.7 59v44.7h-25.6V23.9zm131.4 0c9.1 0 17.2 1.6 24.2 4.9 7 3.3 12.4 7.9 16.3 13.9 3.9 6 5.8 13 5.8 21 0 8-2 15-5.9 21s-9.4 10.6-16.4 13.9c-7 3.3-15 4.9-24.1 4.9h-15.4v23.2h-26.5V23.9h41.9zm-1.6 57.1c6.5 0 11.6-1.6 15.3-4.9 3.7-3.2 5.5-7.8 5.5-13.6s-1.8-10.3-5.5-13.6c-3.7-3.2-8.8-4.9-15.3-4.9h-13.8V81h13.8zm72.3-34.8c4.1-6.6 9.6-11.8 16.4-15.5 6.8-3.7 14.5-5.6 23.1-5.6v27.7h-7.1c-9.8 0-17.3 2.3-22.5 6.9-5.2 4.6-7.8 12.3-7.8 23.1v23.9h-26.5V26.1h26.5v20.1zm59.5-20.1c8.6 0 16.3 1.9 23.1 5.6 6.8 3.7 12.1 8.9 16 15.5 3.9 6.6 5.8 14.1 5.8 22.5s-1.9 15.9-5.8 22.5c-3.9 6.6-9.2 11.8-16 15.5-6.8 3.7-14.5 5.6-23.1 5.6s-16.3-1.9-23.1-5.6c-6.8-3.7-12.1-8.9-16-15.5-3.9-6.6-5.8-14.1-5.8-22.5s1.9-15.9 5.8-22.5c3.9-6.6 9.2-11.8 16-15.5 6.8-3.7 14.5-5.6 23.1-5.6zm0 22.3c-6.3 0-11.4 2.1-15.2 6.2-3.8 4.1-5.8 9.5-5.8 16.2s2 12.1 5.8 16.2c3.8 4.1 8.9 6.2 15.2 6.2s11.4-2.1 15.2-6.2c3.8-4.1 5.8-9.5 5.8-16.2s-2-12.1-5.8-16.2c-3.8-4.1-8.9-6.2-15.2-6.2zm78.3 30.1c.6 4.8 2.8 8.5 6.4 11.2 3.6 2.7 8.1 4 13.4 4 4.1 0 7.6-.8 10.5-2.5 2.9-1.7 4.9-4 5.9-7h25.4c-2.4 9.2-7.4 16.4-15.1 21.6-7.7 5.2-17 7.8-28.1 7.8-8.6 0-16.3-1.8-23-5.4-6.7-3.6-12-8.7-15.7-15.2-3.8-6.5-5.7-14-5.7-22.4 0-8.5 1.9-16 5.6-22.5 3.8-6.5 9-11.6 15.7-15.3 6.7-3.7 14.4-5.5 23.1-5.5 8.5 0 16 1.8 22.5 5.3 6.5 3.5 11.6 8.5 15.3 14.8 3.7 6.4 5.5 13.7 5.5 22 0 2.3-.1 4.5-.4 6.6h-61.3zm35.6-16.7c-.5-4.6-2.6-8.3-6.2-11-3.6-2.7-8-4.1-13.2-4.1-5 0-9.2 1.3-12.7 4-3.5 2.7-5.7 6.4-6.5 11.1h38.6zM607 48.4c3.9-6.6 9.2-11.8 16-15.5 6.8-3.7 14.5-5.6 23.1-5.6s16.3 1.9 23.1 5.6c6.8 3.7 12.1 8.9 16 15.5 3.9 6.6 5.8 14.1 5.8 22.5s-1.9 15.9-5.8 22.5c-3.9 6.6-9.2 11.8-16 15.5-6.8 3.7-14.5 5.6-23.1 5.6s-16.3-1.9-23.1-5.6c-6.8-3.7-12.1-8.9-16-15.5-3.9-6.6-5.8-14.1-5.8-22.5s1.9-15.9 5.8-22.5zm29.8 37.5c3.8 4.1 8.9 6.2 15.2 6.2s11.4-2.1 15.2-6.2c3.8-4.1 5.8-9.5 5.8-16.2s-2-12.1-5.8-16.2c-3.8-4.1-8.9-6.2-15.2-6.2s-11.4 2.1-15.2 6.2c-3.8 4.1-5.8 9.5-5.8 16.2s2 12.1 5.8 16.2z" fill="currentColor"/><path d="m29.9 68.4 19-32.9L29.7 51 10.5 18.6 0 0l29.7 51.4v.1L39 68.4l19.2 33.2L77.4 68.4 58.2 35.5l-.2-.4L29.9 0 10.5 35.5l.1.1L0 51.5l29.9 51.4L39 85.7z" fill="#00adef"/></svg>
+                </div>
+                <!-- Duplicado para efecto loop -->
+                <div class="carousel-item">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker Logo">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png" alt="GitHub Logo">
+                </div>
+                <div class="carousel-item">
+                    <svg role="img" aria-label="GitHub Codespaces Logo" viewBox="0 0 609 130" xmlns="http://www.w3.org/2000/svg"><path d="M75.4 23.9h26.5v79.8H75.4V23.9zm41.7 0h28.3l22.8 35.7 23.1-35.7h27.3v79.8h-26.5V59.1l-24.1 37.3h-.6L142.7 59v44.7h-25.6V23.9zm131.4 0c9.1 0 17.2 1.6 24.2 4.9 7 3.3 12.4 7.9 16.3 13.9 3.9 6 5.8 13 5.8 21 0 8-2 15-5.9 21s-9.4 10.6-16.4 13.9c-7 3.3-15 4.9-24.1 4.9h-15.4v23.2h-26.5V23.9h41.9zm-1.6 57.1c6.5 0 11.6-1.6 15.3-4.9 3.7-3.2 5.5-7.8 5.5-13.6s-1.8-10.3-5.5-13.6c-3.7-3.2-8.8-4.9-15.3-4.9h-13.8V81h13.8zm72.3-34.8c4.1-6.6 9.6-11.8 16.4-15.5 6.8-3.7 14.5-5.6 23.1-5.6v27.7h-7.1c-9.8 0-17.3 2.3-22.5 6.9-5.2 4.6-7.8 12.3-7.8 23.1v23.9h-26.5V26.1h26.5v20.1zm59.5-20.1c8.6 0 16.3 1.9 23.1 5.6 6.8 3.7 12.1 8.9 16 15.5 3.9 6.6 5.8 14.1 5.8 22.5s-1.9 15.9-5.8 22.5c-3.9 6.6-9.2 11.8-16 15.5-6.8 3.7-14.5 5.6-23.1 5.6s-16.3-1.9-23.1-5.6c-6.8-3.7-12.1-8.9-16-15.5-3.9-6.6-5.8-14.1-5.8-22.5s1.9-15.9 5.8-22.5c3.9-6.6 9.2-11.8 16-15.5 6.8-3.7 14.5-5.6 23.1-5.6zm0 22.3c-6.3 0-11.4 2.1-15.2 6.2-3.8 4.1-5.8 9.5-5.8 16.2s2 12.1 5.8 16.2c3.8 4.1 8.9 6.2 15.2 6.2s11.4-2.1 15.2-6.2c3.8-4.1 5.8-9.5 5.8-16.2s-2-12.1-5.8-16.2c-3.8-4.1-8.9-6.2-15.2-6.2zm78.3 30.1c.6 4.8 2.8 8.5 6.4 11.2 3.6 2.7 8.1 4 13.4 4 4.1 0 7.6-.8 10.5-2.5 2.9-1.7 4.9-4 5.9-7h25.4c-2.4 9.2-7.4 16.4-15.1 21.6-7.7 5.2-17 7.8-28.1 7.8-8.6 0-16.3-1.8-23-5.4-6.7-3.6-12-8.7-15.7-15.2-3.8-6.5-5.7-14-5.7-22.4 0-8.5 1.9-16 5.6-22.5 3.8-6.5 9-11.6 15.7-15.3 6.7-3.7 14.4-5.5 23.1-5.5 8.5 0 16 1.8 22.5 5.3 6.5 3.5 11.6 8.5 15.3 14.8 3.7 6.4 5.5 13.7 5.5 22 0 2.3-.1 4.5-.4 6.6h-61.3zm35.6-16.7c-.5-4.6-2.6-8.3-6.2-11-3.6-2.7-8-4.1-13.2-4.1-5 0-9.2 1.3-12.7 4-3.5 2.7-5.7 6.4-6.5 11.1h38.6zM607 48.4c3.9-6.6 9.2-11.8 16-15.5 6.8-3.7 14.5-5.6 23.1-5.6s16.3 1.9 23.1 5.6c6.8 3.7 12.1 8.9 16 15.5 3.9 6.6 5.8 14.1 5.8 22.5s-1.9 15.9-5.8 22.5c-3.9 6.6-9.2 11.8-16 15.5-6.8 3.7-14.5 5.6-23.1 5.6s-16.3-1.9-23.1-5.6c-6.8-3.7-12.1-8.9-16-15.5-3.9-6.6-5.8-14.1-5.8-22.5s1.9-15.9 5.8-22.5zm29.8 37.5c3.8 4.1 8.9 6.2 15.2 6.2s11.4-2.1 15.2-6.2c3.8-4.1 5.8-9.5 5.8-16.2s-2-12.1-5.8-16.2c-3.8-4.1-8.9-6.2-15.2-6.2s-11.4 2.1-15.2 6.2c-3.8 4.1-5.8 9.5-5.8 16.2s2 12.1 5.8 16.2z" fill="currentColor"/><path d="m29.9 68.4 19-32.9L29.7 51 10.5 18.6 0 0l29.7 51.4v.1L39 68.4l19.2 33.2L77.4 68.4 58.2 35.5l-.2-.4L29.9 0 10.5 35.5l.1.1L0 51.5l29.9 51.4L39 85.7z" fill="#00adef"/></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="reveal-up section-title">Why Choose PC-Free?</h2>
+            
+            <div class="features-grid">
+                <article class="reveal-up feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-icon"><i class="bi bi-gift-fill"></i></div>
+                        <div class="feature-content">
+                            <h3>100% Free</h3>
+                            <p>No hidden costs or subscriptions. Completely open source and free to use with GitHub's free tier.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="reveal-up feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-icon"><i class="bi bi-cloud-fill"></i></div>
+                        <div class="feature-content">
+                            <h3>Cloud-Based</h3>
+                            <p>Run Windows without owning a powerful PC. Access from any device with a web browser.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="reveal-up feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <div class="feature-content">
+                            <h3>5-Minute Setup</h3>
+                            <p>Deploy Windows 10 in minutes with our one-click GitHub Codespaces integration.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="reveal-up feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-icon"><i class="bi bi-box-seam-fill"></i></div>
+                        <div class="feature-content">
+                            <h3>Docker Powered</h3>
+                            <p>Isolated, portable, and secure environment powered by Docker containers.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="reveal-up feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-icon"><i class="bi bi-globe-americas"></i></div>
+                        <div class="feature-content">
+                            <h3>Browser Access</h3>
+                            <p>No VPN or complex setup. Access Windows directly through your web browser.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="reveal-up feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-icon"><i class="bi bi-hdd-stack-fill"></i></div>
+                        <div class="feature-content">
+                            <h3>Persistent Storage</h3>
+                            <p>Your data, files, and installed apps persist between sessions.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="reveal-up section-title">PC-Free in Action</h2>
+            <div class="gallery-grid">
+                <div class="reveal-up gallery-item"> 
+                    <img src="https://raw.githubusercontent.com/jephersonRD/pc-free/main/images/1.jpg" alt="Windows 10 running applications" loading="lazy">
+                    <div class="gallery-caption">
+                        <h3>Full Desktop Experience</h3>
+                        <p>Run your favorite Windows applications seamlessly.</p>
+                    </div>
+                </div>
+                <div class="reveal-up gallery-item">
+                    <img src="https://raw.githubusercontent.com/jephersonRD/pc-free/main/images/windows11-about.png" alt="Windows About Dialog" loading="lazy">
+                    <div class="gallery-caption">
+                        <h3>System Information</h3>
+                        <p>Access and manage system settings just like on a local PC.</p>
+                    </div>
+                </div>
+                <div class="reveal-up gallery-item">
+                    <img src="https://i.pinimg.com/originals/8f/41/cc/8f41cc4bf3fd54fba59db539954a3966.jpg" alt="VS Code inside Windows environment" loading="lazy">
+                    <div class="gallery-caption">
+                        <h3>Development Ready</h3>
+                        <p>Install development tools like VS Code and start coding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison" class="comparison-section">
+        <div class="container">
+            <h2 class="reveal-up section-title">How Does PC-Free Compare?</h2>
+            
+            <div class="reveal-up table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>PC-Free</th>
+                            <th>Azure Virtual Desktop</th>
+                            <th>AWS WorkSpaces</th>
+                            <th>Local VM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Monthly Cost</strong></td>
+                            <td>✅ $0 (Free)</td>
+                            <td>❌ $31-100+</td>
+                            <td>❌ $25-75+</td>
+                            <td>✅ $0 (Free)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Setup Time</strong></td>
+                            <td>⚡ 5 minutes</td>
+                            <td>⏱️ 30+ minutes</td>
+                            <td>⏱️ 30+ minutes</td>
+                            <td>⏱️ 15-30 minutes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hardware Required</strong></td>
+                            <td>✅ None</td>
+                            <td>✅ None</td>
+                            <td>✅ None</td>
+                            <td>❌ Powerful PC needed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Browser Access</strong></td>
+                            <td>✅ Yes</td>
+                            <td>✅ Yes</td>
+                            <td>✅ Yes</td>
+                            <td>⚠️ Limited</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Open Source</strong></td>
+                            <td>✅ Yes</td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>⚠️ Partial</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section id="quick-start" class="quick-start-section">
+        <div class="container">
+            <h2 class="reveal-up section-title">Guía Rápida - Get Started in Minutes</h2>
+            
+            <div class="steps-container">
+                <article class="reveal-up step-card">
+                    <span class="step-number">1</span>
+                    <i class="bi bi-hdd-stack step-icon"></i>
+                    <div class="step-content">
+                        <h3>Verifica el almacenamiento disponible</h3>
+                        <pre><code>df -h</code></pre>
+                        <p>Escoge la partición con más espacio libre.</p>
+                    </div>
+                </article>
+
+                <article class="reveal-up step-card">
+                    <span class="step-number">2</span>
+                    <i class="bi bi-folder-plus step-icon"></i>
+                    <div class="step-content">
+                        <h3>Crea la carpeta de datos para Docker</h3>
+                        <pre><code>sudo mkdir -p /tmp/docker-data</code></pre>
+                    </div>
+                </article>
+
+                <article class="reveal-up step-card">
+                    <span class="step-number">3</span>
+                    <i class="bi bi-file-earmark-code step-icon"></i>
+                    <div class="step-content">
+                        <h3>Configura Docker</h3>
+                        <p>Edita el archivo:</p>
+                        <pre><code>sudo nano /etc/docker/daemon.json</code></pre>
+                        <p>Agrega:</p>
+                        <pre><code>{
+  "data-root": "/tmp/docker-data"
+}</code></pre>
+                    </div>
+                </article>
+
+                <article class="reveal-up step-card">
+                    <span class="step-number">4</span>
+                    <i class="bi bi-arrow-repeat step-icon"></i>
+                    <div class="step-content">
+                        <h3>Reinicia tu Codespace</h3>
+                        <p>Para aplicar los cambios de configuración.</p>
+                    </div>
+                </article>
+
+                <article class="reveal-up step-card">
+                    <span class="step-number">5</span>
+                    <i class="bi bi-patch-check step-icon"></i>
+                    <div class="step-content">
+                        <h3>Verifica Docker</h3>
+                        <pre><code>docker info</code></pre>
+                        <p>Asegúrate de que <code>Docker Root Dir</code> sea <code>/tmp/docker-data</code>.</p>
+                    </div>
+                </article>
+
+                <article class="reveal-up step-card">
+                    <span class="step-number">6</span>
+                    <i class="bi bi-shield-lock step-icon"></i>
+                    <div class="step-content">
+                        <h3>Configura las variables de entorno</h3>
+                        <p>Crea el archivo <code>.env</code>:</p>
+                        <pre><code>WINDOWS_USERNAME=YourUsername
+WINDOWS_PASSWORD=YourPassword
+GITHUB_USER=YourGitHubUsername</code></pre>
+                        <p>🛑 Agrega a <code>.gitignore</code>:</p>
+                        <pre><code>echo ".env" >> .gitignore</code></pre>
+                    </div>
+                </article>
+
+                <article class="reveal-up step-card">
+                    <span class="step-number">7</span>
+                    <i class="bi bi-filetype-yml step-icon"></i>
+                    <div class="step-content">
+                        <h3>Archivo windows10.yml</h3>
+                        <pre><code># Antes de ejecutar docker-compose up, ejecuta:
+# bash check_github_follow.sh || exit 1
+# Si no sigues a https://github.com/jephersonRD, el entorno no se iniciará.
+services:
+  windows:&#x000A;    image: dockurr/windows&#x000A;    container_name: windows&#x000A;    environment:&#x000A;      VERSION: "10"&#x000A;      USERNAME: ${WINDOWS_USERNAME}&#x000A;      PASSWORD: ${WINDOWS_PASSWORD}&#x000A;      RAM_SIZE: "10G"&#x000A;      CPU_CORES: "4"&#x000A;    cap_add:&#x000A;      - NET_ADMIN&#x000A;    ports:&#x000A;      - "8006:8006"&#x000A;      - "3389:3389/tcp"&#x000A;    volumes:&#x000A;      - /tmp/docker-data:/mnt/disco1&#x000A;      - windows-data:/mnt/windows-data&#x000A;    devices:&#x000A;      - "/dev/kvm:/dev/kvm"&#x000A;      - "/dev/net/tun:/dev/net/tun"&#x000A;    stop_grace_period: 2m&#x000A;    restart: always
+
+volumes:
+  windows-data:</code></pre>
+                    </div>
+                </article>
+
+                <article class="reveal-up step-card">
+                    <span class="step-number">8</span>
+                    <i class="bi bi-play-circle step-icon"></i>
+                    <div class="step-content">
+                        <h3>Inicia el contenedor</h3>
+                        <p>Para iniciar por primera vez:</p>
+                        <pre><code>docker-compose -f windows10.yml up</code></pre>
+                        <p>Para apagar la PC:</p>
+                        <pre><code>docker stop windows</code></pre>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="reveal-up cta-center">
+                <a href="https://github.com/jephersonRD/pc-free" target="_blank" rel="noopener noreferrer">
+                    <button class="Button1 glow-down">
+                        <span>View Full Documentation</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="reveal-up section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="reveal-up faq-item">
+                    <button class="faq-question">
+                        <span>How long does Windows take to boot?</span>
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Initial boot:</strong> 5-10 minutes (downloading Windows image)<br>
+                        <strong>Subsequent boots:</strong> 2-3 minutes</p>
+                    </div>
+                </div>
+
+                <div class="reveal-up faq-item">
+                    <button class="faq-question">
+                        <span>Can I install additional software?</span>
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! You have full administrator access. Installed software persists in Docker volumes between restarts.</p>
+                    </div>
+                </div>
+
+                <div class="reveal-up faq-item">
+                    <button class="faq-question">
+                        <span>Does this work on GitHub free tier?</span>
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! GitHub free tier includes 60 hours/month of Codespaces, which is sufficient for regular testing and development work.</p>
+                    </div>
+                </div>
+
+                <div class="reveal-up faq-item">
+                    <button class="faq-question">
+                        <span>Is this legal to use?</span>
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, provided you have a valid Windows license. This uses official Windows installation methods. Check Microsoft's licensing terms for your use case.</p>
+                    </div>
+                </div>
+
+                <div class="reveal-up faq-item">
+                    <button class="faq-question">
+                        <span>Can I use this for gaming?</span>
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Limited. Codespaces don't have GPU acceleration. Light, older games may work, but modern 3D games won't run well.</p>
+                    </div>
+                </div>
+
+                <div class="reveal-up faq-item">
+                    <button class="faq-question">
+                        <span>What internet speed do I need?</span>
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Minimum 2 Mbps for basic usage. 5+ Mbps recommended for smooth experience. Initial setup requires downloading ~4GB Windows image.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section reveal-up" id="cta-section">
+        <div class="cta-content">
+            <div class="container">
+                <h2>Ready to Get Started?</h2>
+                <p>Deploy Windows 10 in your browser for free in just 5 minutes</p>
+                <a href="https://github.com/jephersonRD/pc-free" target="_blank" rel="noopener noreferrer">
+                    <button class="Button1">
+                        <span>Start Now on GitHub</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo" aria-label="PC-Free Home">
+                        <span class="logo-icon">☁️</span>
+                        <span class="logo-text">PC-Free</span>
+                    </a>
+                    <p class="footer-description">Run a full Windows 10 environment in your browser, completely free. Powered by Docker and GitHub Codespaces.</p>
+                </div>
+
+                <div class="footer-links-group">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#features">Features</a>
+                        <a href="#comparison">Comparison</a>
+                        <a href="#quick-start">Quick Start</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
+                </div>
+
+                <div class="footer-links-group">
+                    <h4>Community</h4>
+                    <div class="footer-links">
+                        <a href="https://github.com/jephersonRD/pc-free" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+                        <a href="https://github.com/jephersonRD/pc-free/issues" target="_blank" rel="noopener noreferrer">Report a Bug</a>
+                        <a href="https://github.com/jephersonRD/pc-free/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://github.com/jephersonRD/pc-free" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="https://github.com/jephersonRD" target="_blank" aria-label="Author's Profile" rel="noopener noreferrer">
+                            <i class="bi bi-person-circle"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 PC-Free. MIT License. Made with ❤️ for developers.</p>
+                <p class="footer-credits">Special thanks to <a href="https://github.com/dockurr/windows" target="_blank" rel="noopener noreferrer">dockurr/windows</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/ScrollTrigger.min.js" defer></script>
+    <script src="index.js" defer></script>
+</body>
+</html>
