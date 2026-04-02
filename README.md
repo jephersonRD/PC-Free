@@ -548,7 +548,7 @@ If PC-Free helped you, consider:
 
 ## 🇪🇸 Español
 
-### Inicio Rápido en Español
+### Inicio Rápido en Español 
 
 1. Haz fork del repositorio
 2. Abre en Codespace
