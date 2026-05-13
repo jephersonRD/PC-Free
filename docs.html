@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC-Free — Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #f0f0ee;
+  --pill:         #EDEDED;
+  --headline:     #111827;
+  --nav:          #404040;
+  --nav-hover:    #111827;
+  --muted:        #9ca3af;
+  --accent:       #3b82f6;
+  --accent-lt:    #60a5fa;
+  --accent-dk:    #2563eb;
+  --logo:         rgb(84,84,84);
+  --glass-bg:     rgba(255,255,255,0.62);
+  --glass-border: rgba(255,255,255,0.82);
+  --glass-shadow: 0 6px 32px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+
+  /* code */
+  --code-bg:      #1a1d27;
+  --code-text:    #e2e8f0;
+  --code-comment: #6b7db3;
+  --code-key:     #7dd3fc;
+  --code-str:     #86efac;
+  --code-num:     #fbbf24;
+  --code-cmd:     #a78bfa;
+}
+
+html { scroll-behavior: smooth; scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(240, 240, 238, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: -1;
+}
+
+/* grid texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.020) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.020) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob {
+  position: fixed; border-radius: 50%; filter: blur(110px);
+  pointer-events: none; z-index: 0;
+}
+.blob-1 { width:580px; height:580px; background:#bfdbfe; top:-160px; right:-100px; opacity:.16; }
+.blob-2 { width:360px; height:360px; background:#dbeafe; bottom:60px; left:-60px;  opacity:.14; }
+
+/* ══════════════════════════════
+   TOP NAV — identical to others
+══════════════════════════════ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  gap: 0.75rem;
+  background: rgba(240,240,238,0.80);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.logo-container {
+  display: flex; align-items: center; justify-content: center;
+  width: 2.75rem; height: 2.75rem;
+  border-radius: 9999px;
+  background-color: #EDEDED;
+  flex-shrink: 0; text-decoration: none;
+}
+
+.nav-links-pill {
+  display: flex; align-items: center;
+  gap: 2.5rem; padding: .75rem 2rem;
+  border-radius: .75rem; background-color: #EDEDED;
+}
+
+.nav-link {
+  font-size: .875rem; font-weight: 500;
+  color: #404040; text-decoration: none;
+  transition: color .2s;
+}
+.nav-link:hover  { color: #111827; }
+.nav-link.active { color: #111827; }
+
+/* ══════════════════════════════
+   PAGE LAYOUT
+══════════════════════════════ */
+.page-layout {
+  position: relative; z-index: 10;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 40px 24px 96px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: sticky;
+  top: 80px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,.9);
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.sidebar-section {
+  padding: 4px 16px;
+  margin-bottom: 4px;
+}
+
+.sidebar-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 8px 6px;
+  display: block;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--nav);
+  text-decoration: none;
+  transition: background .15s, color .15s;
+  cursor: pointer;
+}
+.sidebar-link i { font-size: 15px; color: var(--muted); flex-shrink: 0; transition: color .15s; }
+.sidebar-link:hover { background: rgba(0,0,0,.04); color: var(--nav-hover); }
+.sidebar-link:hover i { color: var(--nav); }
+.sidebar-link.active { background: rgba(59,130,246,.09); color: var(--accent-dk); }
+.sidebar-link.active i { color: var(--accent); }
+
+.sidebar-divider {
+  height: 1px;
+  background: rgba(0,0,0,.06);
+  margin: 8px 16px 12px;
+}
+
+/* ── MAIN CONTENT ── */
+main { min-width: 0; }
+
+/* hero */
+.doc-hero {
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(0,0,0,.07);
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(59,130,246,.08);
+  border: 1px solid rgba(59,130,246,.20);
+  border-radius: 100px;
+  padding: 5px 14px 5px 10px;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: var(--accent); letter-spacing: .7px;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.eyebrow i { font-size: 13px; }
+
+.doc-hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  color: var(--headline);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.doc-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(120deg, var(--accent) 20%, var(--accent-lt) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.doc-hero p {
+  font-size: 15.5px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 580px;
+  margin-bottom: 20px;
+}
+
+/* badges row */
+.badges {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 11px;
+  border-radius: 100px;
+  font-family: 'Sora', sans-serif;
+  font-size: 11.5px; font-weight: 600;
+  text-decoration: none;
+  transition: opacity .18s;
+}
+.badge:hover { opacity: .78; }
+.badge.gray  { background: rgba(0,0,0,.07);   border:1px solid rgba(0,0,0,.10);   color: var(--nav); }
+.badge.blue  { background: rgba(59,130,246,.10); border:1px solid rgba(59,130,246,.22); color: var(--accent-dk); }
+.badge.green { background: rgba(22,163,74,.09); border:1px solid rgba(22,163,74,.22); color: #15803d; }
+.badge.amber { background: rgba(217,119,6,.09); border:1px solid rgba(217,119,6,.22); color: #b45309; }
+.badge i { font-size: 13px; }
+
+/* quick links */
+.quick-links {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.ql {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px;
+  border-radius: 100px;
+  font-family: 'Sora', sans-serif;
+  font-size: 12.5px; font-weight: 600;
+  text-decoration: none;
+  transition: all .18s;
+}
+.ql.primary {
+  background: var(--accent); color: #fff;
+  border: 1.5px solid var(--accent-lt);
+  box-shadow: 0 3px 12px rgba(59,130,246,.25);
+}
+.ql.primary:hover { background: var(--accent-dk); }
+.ql.ghost {
+  background: rgba(255,255,255,.6);
+  border: 1px solid rgba(0,0,0,.10);
+  color: var(--nav);
+  backdrop-filter: blur(8px);
+}
+.ql.ghost:hover { background: rgba(255,255,255,.85); color: var(--nav-hover); }
+
+/* ── SECTIONS ── */
+.doc-section {
+  margin-bottom: 56px;
+  scroll-margin-top: 90px;
+}
+
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--headline);
+  letter-spacing: -.5px;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title i { font-size: 20px; color: var(--accent); }
+
+.section-title-sm {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--headline);
+  letter-spacing: -.2px;
+  margin: 20px 0 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-title-sm i { font-size: 15px; color: var(--accent); }
+
+.prose {
+  font-size: 14.5px;
+  color: var(--nav);
+  line-height: 1.78;
+  margin-bottom: 14px;
+}
+.prose strong { color: var(--headline); font-weight: 600; }
+.prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(59,130,246,.28); transition: color .15s; }
+.prose a:hover { color: var(--accent-dk); }
+
+/* ── GLASS CARD ── */
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,.9);
+  padding: 22px 24px;
+  margin-bottom: 14px;
+}
+
+/* benefits grid */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 10px;
+  margin-bottom: 0;
+}
+.benefit-item {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.80);
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+.benefit-icon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: 9px;
+  background: rgba(22,163,74,.10);
+  border: 1px solid rgba(22,163,74,.18);
+  display: flex; align-items: center; justify-content: center;
+}
+.benefit-icon i { font-size: 15px; color: #16a34a; }
+.benefit-text { font-size: 13.5px; font-weight: 500; color: var(--headline); line-height: 1.4; }
+.benefit-text span { font-size: 12.5px; font-weight: 400; color: var(--muted); display: block; }
+
+/* steps */
+.steps { counter-reset: step; display: flex; flex-direction: column; gap: 10px; }
+.step {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 16px 18px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.80);
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+}
+.step-num {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(59,130,246,.12);
+  border: 1px solid rgba(59,130,246,.22);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--accent-dk);
+  counter-increment: step;
+}
+.step-content { font-size: 14px; color: var(--nav); line-height: 1.6; }
+.step-content strong { color: var(--headline); font-weight: 600; }
+
+/* ── CODE BLOCKS ── */
+.code-block {
+  background: var(--code-bg);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 12px 0 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.15);
+}
+.code-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.05);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.code-lang {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px; font-weight: 600;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .6px;
+  text-transform: uppercase;
+}
+.code-dots { display: flex; gap: 6px; }
+.code-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.code-dots span:nth-child(1) { background: #ff5f57; }
+.code-dots span:nth-child(2) { background: #febc2e; }
+.code-dots span:nth-child(3) { background: #28c840; }
+.copy-btn {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,.3);
+  font-family: 'Sora', sans-serif;
+  font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  transition: background .15s, color .15s;
+}
+.copy-btn:hover { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); }
+.copy-btn i { font-size: 13px; }
+pre {
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--code-text);
+}
+pre .c  { color: var(--code-comment); font-style: italic; }
+pre .k  { color: var(--code-key); }
+pre .s  { color: var(--code-str); }
+pre .n  { color: var(--code-num); }
+pre .p  { color: var(--code-cmd); }
+pre .m  { color: #f9a8d4; }
+
+/* inline code */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(59,130,246,.08);
+  border: 1px solid rgba(59,130,246,.16);
+  border-radius: 5px;
+  padding: 1px 6px;
+  color: var(--accent-dk);
+}
+
+/* ── COMPARISON TABLE ── */
+.compare-wrap {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(22px);
+  overflow: hidden;
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,.9);
+}
+.compare-wrap table {
+  width: 100%; border-collapse: collapse;
+}
+.compare-wrap thead tr {
+  background: linear-gradient(135deg, var(--headline) 0%, #1e293b 100%);
+}
+.compare-wrap thead th {
+  padding: 14px 16px;
+  font-family: 'Sora', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: rgba(255,255,255,.45);
+  text-align: left;
+  white-space: nowrap;
+}
+.compare-wrap thead th.hl { color: #fff; }
+.compare-wrap tbody tr { border-top: 1px solid rgba(0,0,0,.05); transition: background .12s; }
+.compare-wrap tbody tr:hover { background: rgba(59,130,246,.03); }
+.compare-wrap tbody td {
+  padding: 13px 16px; font-size: 13.5px; color: var(--nav);
+  vertical-align: middle;
+}
+.compare-wrap tbody td:first-child {
+  font-family: 'Sora', sans-serif; font-size: 12.5px;
+  font-weight: 600; color: var(--headline);
+}
+.pill-sm {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-size: 12px; font-weight: 600;
+  font-family: 'Sora', sans-serif;
+}
+.pill-sm.green { background: rgba(22,163,74,.09); border:1px solid rgba(22,163,74,.18); color:#15803d; }
+.pill-sm.red   { background: rgba(220,38,38,.08); border:1px solid rgba(220,38,38,.18); color:#b91c1c; }
+.pill-sm.amber { background: rgba(217,119,6,.08); border:1px solid rgba(217,119,6,.18); color:#b45309; }
+.pill-sm.blue  { background: rgba(59,130,246,.09); border:1px solid rgba(59,130,246,.22); color:var(--accent-dk); }
+.pill-sm.gray  { background: rgba(0,0,0,.05); border:1px solid rgba(0,0,0,.09); color:var(--nav); }
+.pill-sm i { font-size: 12px; }
+
+/* ── REQUIREMENTS GRID ── */
+.req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.req-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--glass-shadow);
+  padding: 18px 20px;
+}
+.req-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--headline);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 7px;
+}
+.req-card-title i { font-size: 15px; color: var(--accent); }
+.req-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.req-list li {
+  font-size: 13px; color: var(--nav);
+  display: flex; align-items: flex-start; gap: 7px; line-height: 1.45;
+}
+.req-list li::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent-lt);
+  flex-shrink: 0; margin-top: 5px;
+}
+
+/* ── TROUBLESHOOT ── */
+.trouble-list { display: flex; flex-direction: column; gap: 10px; }
+.trouble-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+}
+.trouble-trigger {
+  width: 100%; display: flex; align-items: center;
+  gap: 12px; padding: 16px 18px;
+  background: none; border: none; cursor: pointer; text-align: left;
+}
+.trouble-icon {
+  width: 30px; height: 30px; flex-shrink: 0;
+  border-radius: 8px;
+  background: rgba(220,38,38,.08);
+  border: 1px solid rgba(220,38,38,.16);
+  display: flex; align-items: center; justify-content: center;
+}
+.trouble-icon i { font-size: 14px; color: #b91c1c; }
+.trouble-q {
+  flex: 1;
+  font-family: 'Sora', sans-serif;
+  font-size: 13.5px; font-weight: 600; color: var(--headline);
+}
+.trouble-chevron { font-size: 15px; color: var(--muted); transition: transform .28s ease; }
+.trouble-item.open .trouble-chevron { transform: rotate(180deg); }
+.trouble-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+.trouble-item.open .trouble-body { grid-template-rows: 1fr; }
+.trouble-body-inner { overflow: hidden; }
+.trouble-ans { padding: 0 18px 18px 60px; font-size: 13.5px; color: var(--nav); line-height: 1.7; }
+
+/* ── ROADMAP ── */
+.roadmap-grid { display: flex; flex-direction: column; gap: 6px; }
+.roadmap-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 14px;
+  border-radius: 11px;
+  font-size: 13.5px; color: var(--nav);
+  transition: background .15s;
+}
+.roadmap-item:hover { background: rgba(0,0,0,.03); }
+.roadmap-item.done  { color: var(--nav-hover); }
+.road-check {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+}
+.road-check.done  { background: rgba(22,163,74,.12); border:1px solid rgba(22,163,74,.22); color:#16a34a; }
+.road-check.todo  { background: rgba(0,0,0,.05); border:1px solid rgba(0,0,0,.10); color:var(--muted); }
+
+/* ── CONTRIBUTE CARDS ── */
+.contrib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.contrib-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s, transform .2s;
+  box-shadow: var(--glass-shadow);
+}
+.contrib-card:hover { box-shadow: 0 10px 36px rgba(59,130,246,.12); transform: translateY(-2px); }
+.contrib-card i { font-size: 22px; color: var(--accent); margin-bottom: 8px; display: block; }
+.contrib-card strong { font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--headline); display:block; margin-bottom:4px; }
+.contrib-card span { font-size:12px; color:var(--muted); }
+
+/* warning box */
+.warn-box {
+  display: flex; gap: 11px; align-items: flex-start;
+  background: rgba(217,119,6,.07);
+  border: 1px solid rgba(217,119,6,.20);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 10px 0;
+}
+.warn-box i { font-size: 17px; color: #b45309; flex-shrink: 0; margin-top: 1px; }
+.warn-box p { font-size: 13.5px; color: var(--nav); line-height: 1.6; }
+.warn-box p strong { color: var(--headline); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.doc-hero    { animation: fadeUp .5s  ease both; }
+.doc-section { animation: fadeUp .45s ease .1s both; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .page-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  .req-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links-pill { gap: 1rem; padding: .625rem 1rem; }
+  .nav-link { font-size: .75rem; }
+  pre { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="Assets/docs.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- ══ TOP NAV ══ -->
+  <nav class="topbar">
+    <div class="logo-container">
+      <svg width="18" height="18" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgb(84,84,84)" d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"/>
+      </svg>
+    </div>
+    <div class="nav-links-pill">
+      <a href="index.html"   class="nav-link">HOME</a>
+      <a href="Compare.html" class="nav-link">COMPARISON</a>
+      <a href="faq.html"      class="nav-link">FAQ</a>
+      <a href="docs.html"     class="nav-link active">DOCS</a>
+      <a href="https://github.com/jephersonRD/pc-free" class="nav-link" target="_blank">Support</a>
+    </div>
+  </nav>
+
+<!-- ══ PAGE ══ -->
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Getting Started</span>
+      <a href="#overview"   class="sidebar-link active"><i class="ti ti-home"></i> Overview</a>
+      <a href="quickstart.html" class="sidebar-link"><i class="ti ti-rocket"></i> Quick Start</a>
+      <a href="#setup"      class="sidebar-link"><i class="ti ti-terminal"></i> Setup Guide</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Reference</span>
+      <a href="#config"    class="sidebar-link"><i class="ti ti-settings"></i> Configuration</a>
+      <a href="#commands"  class="sidebar-link"><i class="ti ti-terminal-2"></i> Commands</a>
+      <a href="#compare"   class="sidebar-link"><i class="ti ti-table"></i> Comparison</a>
+      <a href="#reqs"      class="sidebar-link"><i class="ti ti-checklist"></i> Requirements</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Help</span>
+      <a href="#troubleshoot" class="sidebar-link"><i class="ti ti-bug"></i> Troubleshooting</a>
+      <a href="#roadmap"      class="sidebar-link"><i class="ti ti-map"></i> Roadmap</a>
+      <a href="#contribute"   class="sidebar-link"><i class="ti ti-git-pull-request"></i> Contributing</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <a href="https://github.com/jephersonRD/pc-free" target="_blank" class="sidebar-link">
+        <i class="ti ti-brand-github"></i> GitHub Repo
+      </a>
+      <a href="https://github.com/jephersonRD/pc-free/issues" target="_blank" class="sidebar-link">
+        <i class="ti ti-bug"></i> Report Bug
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <div class="doc-hero" id="overview">
+      <div class="eyebrow"><i class="ti ti-book-2"></i> Documentation</div>
+      <h1>Run <em>Windows 10</em><br>Free in Your Browser</h1>
+      <p>Deploy a complete Windows 10 environment using Docker and GitHub Codespaces. No PC required, no cost, no installation.</p>
+
+      <div class="badges">
+        <a class="badge gray"  href="https://github.com/jephersonRD/pc-free/stargazers"   target="_blank"><i class="ti ti-star"></i> Stars</a>
+        <a class="badge green" href="https://opensource.org/licenses/MIT"                  target="_blank"><i class="ti ti-license"></i> MIT</a>
+        <a class="badge blue"  href="https://www.docker.com/"                               target="_blank"><i class="ti ti-brand-docker"></i> Docker</a>
+        <a class="badge blue"  href="https://www.microsoft.com/windows"                     target="_blank"><i class="ti ti-brand-windows"></i> Windows 10</a>
+      </div>
+
+      <div class="quick-links">
+        <a class="ql primary" href="quickstart.html"><i class="ti ti-rocket"></i> Quick Start</a>
+        <a class="ql ghost"   href="https://github.com/jephersonRD/pc-free" target="_blank"><i class="ti ti-brand-github"></i> View on GitHub</a>
+        <a class="ql ghost"   href="faq.html"><i class="ti ti-help-circle"></i> FAQ</a>
+      </div>
+    </div>
+
+    <!-- WHAT IS -->
+    <section class="doc-section">
+      <div class="section-title"><i class="ti ti-info-circle"></i> What is PC-Free?</div>
+      <p class="prose">PC-Free is an open-source project that lets you run <strong>Windows 10 directly in your web browser</strong> via GitHub Codespaces and Docker. No local installation, no powerful hardware, completely free.</p>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="ti ti-coin-off"></i></div>
+          <div class="benefit-text">100% Free<span>No hidden costs or subscriptions</span></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="ti ti-world"></i></div>
+          <div class="benefit-text">Browser-Based<span>Access Windows from any device</span></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="ti ti-bolt"></i></div>
+          <div class="benefit-text">5-Minute Setup<span>Deploy Windows 10 in minutes</span></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="ti ti-device-desktop-off"></i></div>
+          <div class="benefit-text">No PC Required<span>Run Windows without a Windows PC</span></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="ti ti-brand-docker"></i></div>
+          <div class="benefit-text">Docker Container<span>Isolated, secure, and portable</span></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="ti ti-database"></i></div>
+          <div class="benefit-text">Persistent Data<span>Files and apps survive restarts</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK START -->
+    <section class="doc-section" id="quickstart">
+      <div class="section-title"><i class="ti ti-rocket"></i> Quick Start</div>
+
+      <div class="section-title-sm"><i class="ti ti-number-1"></i> Method 1 — GitHub Codespaces (Recommended)</div>
+      <p class="prose">The fastest path to a running Windows environment. No local dependencies needed.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Fork this repository</strong> — click the Fork button at the top-right of the GitHub page.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Open Codespace</strong> — click <code>Code → Codespaces → Create codespace on main</code>.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Wait ~2 minutes</strong> for the environment to auto-configure.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Follow the Setup Guide below</strong> to start your Windows container.</div></div>
+      </div>
+
+      <div class="section-title-sm" style="margin-top:24px;"><i class="ti ti-number-2"></i> Method 2 — Local Docker</div>
+      <p class="prose">Requires Docker Engine 20.10+ with KVM support on Linux. See <a href="#reqs">System Requirements</a> for details.</p>
+    </section>
+
+    <!-- SETUP GUIDE -->
+    <section class="doc-section" id="setup">
+      <div class="section-title"><i class="ti ti-terminal"></i> Setup Guide</div>
+
+      <div class="section-title-sm"><i class="ti ti-device-floppy"></i> 1. Check available storage</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>df -h</pre>
+      </div>
+      <p class="prose">Pick the partition with the most free space.</p>
+
+      <div class="section-title-sm"><i class="ti ti-folder-plus"></i> 2. Create Docker data folder</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>sudo mkdir -p /tmp/docker-data</pre>
+      </div>
+
+      <div class="section-title-sm"><i class="ti ti-settings"></i> 3. Configure Docker daemon</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>sudo nano /etc/docker/daemon.json</pre>
+      </div>
+      <p class="prose">Add the following content:</p>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">json</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>{
+  <span class="k">"data-root"</span>: <span class="s">"/tmp/docker-data"</span>
+}</pre>
+      </div>
+
+      <div class="section-title-sm"><i class="ti ti-refresh"></i> 4. Restart Codespace, then verify Docker</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>docker info <span class="c"># Docker Root Dir should be /tmp/docker-data</span></pre>
+      </div>
+
+      <div class="section-title-sm"><i class="ti ti-file-text"></i> windows10.yml</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">yaml</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre><span class="c"># Run check_github_follow.sh before docker-compose up</span>
+services:
+  windows:
+    <span class="k">image:</span> <span class="s">dockurr/windows</span>
+    <span class="k">container_name:</span> <span class="s">windows</span>
+    <span class="k">environment:</span>
+      <span class="k">VERSION:</span> <span class="s">"10"</span>
+      <span class="k">USERNAME:</span> <span class="m">${WINDOWS_USERNAME}</span>
+      <span class="k">PASSWORD:</span> <span class="m">${WINDOWS_PASSWORD}</span>
+      <span class="k">RAM_SIZE:</span> <span class="s">"10G"</span>
+      <span class="k">CPU_CORES:</span> <span class="s">"4"</span>
+    <span class="k">ports:</span>
+      - <span class="s">"8006:8006"</span>   <span class="c"># Web interface</span>
+      - <span class="s">"3389:3389"</span>   <span class="c"># RDP</span>
+    <span class="k">volumes:</span>
+      - <span class="s">/tmp/docker-data:/mnt/disco1</span>
+      - <span class="s">windows-data:/mnt/windows-data</span>
+    <span class="k">restart:</span> <span class="s">always</span>
+<span class="k">volumes:</span>
+  windows-data:</pre>
+      </div>
+
+      <div class="section-title-sm"><i class="ti ti-key"></i> .env file</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">.env</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre><span class="k">WINDOWS_USERNAME</span>=<span class="s">YourUsername</span>
+<span class="k">WINDOWS_PASSWORD</span>=<span class="s">YourPassword</span>
+<span class="k">GITHUB_USER</span>=<span class="s">YourGitHubUsername</span></pre>
+      </div>
+      <div class="warn-box">
+        <i class="ti ti-alert-triangle"></i>
+        <p><strong>Never commit your .env file.</strong> Add it to <code>.gitignore</code> immediately: <code>echo ".env" >> .gitignore</code></p>
+      </div>
+    </section>
+
+    <!-- COMMANDS -->
+    <section class="doc-section" id="commands">
+      <div class="section-title"><i class="ti ti-terminal-2"></i> Commands</div>
+
+      <div class="section-title-sm"><i class="ti ti-player-play"></i> Start</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>docker-compose -f windows10.yml up</pre>
+      </div>
+
+      <div class="section-title-sm"><i class="ti ti-player-stop"></i> Stop / Restart / Logs</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>docker stop windows            <span class="c"># graceful shutdown</span>
+docker restart windows         <span class="c"># restart after freeze</span>
+docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</span></pre>
+      </div>
+
+      <div class="section-title-sm"><i class="ti ti-trash"></i> Remove everything</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>docker-compose -f windows10.yml down -v</pre>
+      </div>
+      <div class="warn-box">
+        <i class="ti ti-alert-triangle"></i>
+        <p>The <code>-v</code> flag <strong>permanently deletes all Windows data</strong> including installed software and files.</p>
+      </div>
+    </section>
+
+    <!-- CONFIG -->
+    <section class="doc-section" id="config">
+      <div class="section-title"><i class="ti ti-settings"></i> Configuration Options</div>
+      <p class="prose">Customize resources by editing the <code>environment</code> block in <code>windows10.yml</code>:</p>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">yaml</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre><span class="k">environment:</span>
+  <span class="k">VERSION:</span>    <span class="s">"10"</span>    <span class="c"># or "11" for Windows 11</span>
+  <span class="k">RAM_SIZE:</span>   <span class="s">"10G"</span>   <span class="c"># minimum 6G</span>
+  <span class="k">CPU_CORES:</span>  <span class="s">"4"</span>     <span class="c"># minimum 2</span>
+  <span class="k">DISK_SIZE:</span>  <span class="s">"64G"</span>   <span class="c"># virtual disk size</span></pre>
+      </div>
+      <p class="prose">To enable native <strong>RDP access</strong>, expose port <code>3389</code> and connect with any Remote Desktop client to <code>localhost:3389</code>.</p>
+    </section>
+
+    <!-- COMPARE -->
+    <section class="doc-section" id="compare">
+      <div class="section-title"><i class="ti ti-table"></i> Comparison</div>
+      <div class="compare-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="hl">⚡ PC-Free</th>
+              <th>Azure VD</th>
+              <th>AWS WorkSpaces</th>
+              <th>Local VM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monthly Cost</td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>$0 Free</span></td>
+              <td><span class="pill-sm red"><i class="ti ti-circle-x"></i>$31–100+</span></td>
+              <td><span class="pill-sm red"><i class="ti ti-circle-x"></i>$25–75+</span></td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>$0 Free</span></td>
+            </tr>
+            <tr>
+              <td>Setup Time</td>
+              <td><span class="pill-sm blue"><i class="ti ti-bolt"></i>5 min</span></td>
+              <td><span class="pill-sm gray"><i class="ti ti-clock"></i>30+ min</span></td>
+              <td><span class="pill-sm gray"><i class="ti ti-clock"></i>30+ min</span></td>
+              <td><span class="pill-sm gray"><i class="ti ti-clock"></i>15–30 min</span></td>
+            </tr>
+            <tr>
+              <td>Hardware</td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>None</span></td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>None</span></td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>None</span></td>
+              <td><span class="pill-sm red"><i class="ti ti-circle-x"></i>Powerful PC</span></td>
+            </tr>
+            <tr>
+              <td>Browser Access</td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>Yes</span></td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>Yes</span></td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>Yes</span></td>
+              <td><span class="pill-sm amber"><i class="ti ti-alert-triangle"></i>Limited</span></td>
+            </tr>
+            <tr>
+              <td>Open Source</td>
+              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>Yes</span></td>
+              <td><span class="pill-sm red"><i class="ti ti-circle-x"></i>No</span></td>
+              <td><span class="pill-sm red"><i class="ti ti-circle-x"></i>No</span></td>
+              <td><span class="pill-sm amber"><i class="ti ti-alert-triangle"></i>Partial</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- REQUIREMENTS -->
+    <section class="doc-section" id="reqs">
+      <div class="section-title"><i class="ti ti-checklist"></i> System Requirements</div>
+      <div class="req-grid">
+        <div class="req-card">
+          <div class="req-card-title"><i class="ti ti-brand-github"></i> GitHub Codespaces</div>
+          <ul class="req-list">
+            <li>Free GitHub account</li>
+            <li>Chrome 90+, Firefox 88+, Edge 90+, Safari 14+</li>
+            <li>10 GB+ available Codespace storage</li>
+            <li>Stable internet — 2 Mbps+ recommended</li>
+          </ul>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title"><i class="ti ti-brand-docker"></i> Local Docker</div>
+          <ul class="req-list">
+            <li>Docker Engine 20.10+</li>
+            <li>20 GB+ free disk space</li>
+            <li>8 GB+ RAM (16 GB recommended)</li>
+            <li>KVM (Linux) or Hyper-V (Windows Pro)</li>
+            <li>Linux, macOS, or Windows 10/11 Pro</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section class="doc-section" id="troubleshoot">
+      <div class="section-title"><i class="ti ti-bug"></i> Troubleshooting</div>
+      <div class="trouble-list">
+
+        <div class="trouble-item">
+          <button class="trouble-trigger">
+            <div class="trouble-icon"><i class="ti ti-player-stop"></i></div>
+            <span class="trouble-q">Container won't start</span>
+            <i class="ti ti-chevron-down trouble-chevron"></i>
+          </button>
+          <div class="trouble-body"><div class="trouble-body-inner">
+            <div class="trouble-ans">
+              Check Docker logs for specific errors with <code>docker logs windows</code>. On Linux, verify KVM access: <code>ls -la /dev/kvm</code>. If <code>/dev/kvm</code> doesn't exist, KVM virtualization may need to be enabled in your BIOS.
+            </div>
+          </div></div>
+        </div>
+
+        <div class="trouble-item">
+          <button class="trouble-trigger">
+            <div class="trouble-icon"><i class="ti ti-clock-slow"></i></div>
+            <span class="trouble-q">Slow performance</span>
+            <i class="ti ti-chevron-down trouble-chevron"></i>
+          </button>
+          <div class="trouble-body"><div class="trouble-body-inner">
+            <div class="trouble-ans">
+              Reduce RAM to <code>6G</code> and CPU to <code>2</code> cores in <code>windows10.yml</code>. Close other resource-intensive Codespace apps and check your Codespace machine type in GitHub settings.
+            </div>
+          </div></div>
+        </div>
+
+        <div class="trouble-item">
+          <button class="trouble-trigger">
+            <div class="trouble-icon"><i class="ti ti-network-off"></i></div>
+            <span class="trouble-q">Cannot access port 8006</span>
+            <i class="ti ti-chevron-down trouble-chevron"></i>
+          </button>
+          <div class="trouble-body"><div class="trouble-body-inner">
+            <div class="trouble-ans">
+              In your Codespace, open the <strong>Ports</strong> tab, find port 8006, right-click and set visibility to <strong>Public</strong>. Then click the globe icon to open in browser. For local Docker, check your firewall settings.
+            </div>
+          </div></div>
+        </div>
+
+        <div class="trouble-item">
+          <button class="trouble-trigger">
+            <div class="trouble-icon"><i class="ti ti-database-off"></i></div>
+            <span class="trouble-q">Storage full error</span>
+            <i class="ti ti-chevron-down trouble-chevron"></i>
+          </button>
+          <div class="trouble-body"><div class="trouble-body-inner">
+            <div class="trouble-ans">
+              Clean unused Docker data with <code>docker system prune -a</code> then verify available space with <code>df -h</code>. This removes unused images, containers, and build cache.
+            </div>
+          </div></div>
+        </div>
+
+        <div class="trouble-item">
+          <button class="trouble-trigger">
+            <div class="trouble-icon"><i class="ti ti-screen-share-off"></i></div>
+            <span class="trouble-q">Black screen after login</span>
+            <i class="ti ti-chevron-down trouble-chevron"></i>
+          </button>
+          <div class="trouble-body"><div class="trouble-body-inner">
+            <div class="trouble-ans">
+              Wait 2–3 minutes for the desktop to fully load, then try refreshing the browser tab. Verify the container is still running with <code>docker ps</code>. If not, restart it: <code>docker restart windows</code>.
+            </div>
+          </div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="doc-section" id="roadmap">
+      <div class="section-title"><i class="ti ti-map"></i> Roadmap</div>
+      <div class="roadmap-grid">
+        <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> Windows 10 support</div>
+        <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> Docker Compose setup</div>
+        <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> Web interface (noVNC)</div>
+        <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> Persistent storage volumes</div>
+        <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> Windows 11 support</div>
+        <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> One-click installer script</div>
+        <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> GPU passthrough (local Docker)</div>
+        <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> Audio support improvement</div>
+        <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> Clipboard synchronization</div>
+        <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> Multiple Windows instances</div>
+      </div>
+      <br>
+      <a class="ql ghost" href="https://github.com/jephersonRD/pc-free/discussions" target="_blank" style="display:inline-flex;">
+        <i class="ti ti-message-circle"></i> Vote for features →
+      </a>
+    </section>
+
+    <!-- CONTRIBUTING -->
+    <section class="doc-section" id="contribute">
+      <div class="section-title"><i class="ti ti-git-pull-request"></i> Contributing</div>
+      <p class="prose">Contributions are welcome! Fork the repo, create a feature branch, commit your changes, and open a Pull Request. See <a href="https://github.com/jephersonRD/pc-free/blob/main/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a> for guidelines.</p>
+
+      <div class="contrib-grid">
+        <a class="contrib-card" href="https://github.com/jephersonRD/pc-free/issues" target="_blank">
+          <i class="ti ti-bug"></i>
+          <strong>Report Bugs</strong>
+          <span>Open an issue on GitHub</span>
+        </a>
+        <a class="contrib-card" href="https://github.com/jephersonRD/pc-free/discussions" target="_blank">
+          <i class="ti ti-bulb"></i>
+          <strong>Suggest Features</strong>
+          <span>Start a discussion</span>
+        </a>
+        <a class="contrib-card" href="https://github.com/jephersonRD/pc-free" target="_blank">
+          <i class="ti ti-star"></i>
+          <strong>Star the Repo</strong>
+          <span>Show your support</span>
+        </a>
+        <a class="contrib-card" href="https://github.com/jephersonRD" target="_blank">
+          <i class="ti ti-user-plus"></i>
+          <strong>Follow @jephersonRD</strong>
+          <span>Stay updated</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* copy button */
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  const text = pre.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+    btn.style.color = '#86efac';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 1800);
+  });
+}
+
+/* troubleshoot accordion */
+document.querySelectorAll('.trouble-trigger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item   = btn.closest('.trouble-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.trouble-item').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* sidebar active highlight on scroll */
+const sections = document.querySelectorAll('.doc-section[id], .doc-hero[id]');
+const sideLinks = document.querySelectorAll('.sidebar-link');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      sideLinks.forEach(l => l.classList.remove('active'));
+      const match = document.querySelector(`.sidebar-link[href="#${e.target.id}"]`);
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

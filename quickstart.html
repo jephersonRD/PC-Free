@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC-Free — Quick Start</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #f0f0ee;
+  --pill:         #EDEDED;
+  --headline:     #111827;
+  --nav:          #404040;
+  --muted:        #9ca3af;
+  --accent:       #3b82f6;
+  --accent-lt:    #60a5fa;
+  --accent-dk:    #2563eb;
+  --logo:         rgb(84,84,84);
+  --glass-bg:     rgba(255,255,255,0.62);
+  --glass-border: rgba(255,255,255,0.82);
+  --glass-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+  --term-bg:      #16181f;
+  --term-border:  rgba(255,255,255,0.07);
+  --gh-bg:        #0d1117;
+}
+
+html { scroll-behavior: smooth; scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 100px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(240, 240, 238, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: -1;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.020) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.020) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none; z-index: 0;
+}
+
+.blob { position: fixed; border-radius: 50%; filter: blur(110px); pointer-events: none; z-index: 0; }
+.blob-1 { width:560px; height:560px; background:#bfdbfe; top:-160px; right:-100px; opacity:.17; }
+.blob-2 { width:380px; height:380px; background:#dbeafe; bottom:60px; left:-70px;  opacity:.14; }
+
+/* ── NAV ── */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 1rem 1.5rem; gap: .75rem;
+  background: rgba(240,240,238,.82);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,.055);
+}
+.logo-container {
+  display: flex; align-items: center; justify-content: center;
+  width: 2.75rem; height: 2.75rem;
+  border-radius: 9999px; background-color: #EDEDED;
+  flex-shrink: 0; text-decoration: none;
+}
+.nav-links-pill {
+  display: flex; align-items: center;
+  gap: 2.5rem; padding: .75rem 2rem;
+  border-radius: .75rem; background-color: #EDEDED;
+}
+.nav-link { font-size:.875rem; font-weight:500; color:#404040; text-decoration:none; transition:color .2s; }
+.nav-link:hover  { color:#111827; }
+.nav-link.active { color:#111827; }
+
+/* ── PAGE WRAPPER ── */
+.page { position: relative; z-index: 10; width: 100%; max-width: 820px; padding-top: 52px; }
+
+/* ── HERO ── */
+.hero { text-align: center; margin-bottom: 52px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.20);
+  border-radius: 100px; padding: 5px 14px 5px 10px;
+  font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700;
+  color: var(--accent); letter-spacing: .7px; text-transform: uppercase; margin-bottom: 20px;
+}
+.eyebrow i { font-size: 13px; }
+h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 700; color: var(--headline);
+  letter-spacing: -2px; line-height: 1.08; margin-bottom: 14px;
+}
+h1 em {
+  font-style: normal;
+  background: linear-gradient(125deg, var(--accent) 20%, var(--accent-lt) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub { font-size: 15.5px; color: var(--muted); line-height: 1.7; max-width: 460px; margin: 0 auto; }
+
+/* ── VIDEO CARD ── */
+.video-card {
+  position: relative;
+  width: 100%; border-radius: 24px; overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.12);
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: transform .25s ease, box-shadow .25s ease;
+  text-decoration: none;
+  display: block;
+  border: 1px solid rgba(255,255,255,.12);
+}
+.video-card:hover { transform: translateY(-4px); box-shadow: 0 32px 100px rgba(0,0,0,.26), 0 8px 24px rgba(0,0,0,.14); }
+
+.video-thumb {
+  width: 100%; aspect-ratio: 16/9;
+  background: url('https://img.youtube.com/vi/JiFhZXbz2b8/maxresdefault.jpg') center/cover no-repeat;
+  display: block;
+  filter: brightness(.88);
+  transition: filter .25s;
+}
+.video-card:hover .video-thumb { filter: brightness(.75); }
+
+/* gradient overlay */
+.video-thumb::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 50%);
+}
+
+/* play button */
+.play-btn {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px; height: 68px;
+  background: rgba(255,255,255,.16);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255,255,255,.30);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .2s;
+}
+.video-card:hover .play-btn { background: rgba(255,0,0,.82); transform: translate(-50%, -50%) scale(1.08); }
+.play-btn i { font-size: 26px; color: #fff; margin-left: 3px; }
+
+/* video label */
+.video-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 20px 22px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,.72), transparent);
+  color: #fff;
+}
+.video-label-title {
+  font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600;
+  margin-bottom: 4px; text-shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+.video-label-sub { font-size: 12.5px; color: rgba(255,255,255,.65); display: flex; align-items: center; gap: 6px; }
+.video-label-sub i { font-size: 13px; color: #ff4444; }
+
+.video-hint {
+  text-align: center; font-size: 12.5px; color: var(--muted);
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  margin-bottom: 56px;
+}
+.video-hint i { font-size: 14px; color: var(--accent-lt); }
+
+/* ── SECTION TITLE ── */
+.sec-title {
+  font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700;
+  color: var(--headline); letter-spacing: -.5px;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+}
+.sec-title i { font-size: 20px; color: var(--accent); }
+
+/* ── STEP TRACK ── */
+.steps-track { display: flex; flex-direction: column; gap: 0; }
+
+.step-row {
+  display: flex; gap: 0; align-items: stretch;
+}
+
+/* left timeline */
+.step-timeline {
+  display: flex; flex-direction: column; align-items: center;
+  flex-shrink: 0; width: 48px;
+}
+.step-dot {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700;
+  z-index: 1;
+}
+.step-dot.github { background: #161b22; border: 2px solid #30363d; color: #e6edf3; }
+.step-dot.terminal { background: rgba(59,130,246,.15); border: 2px solid rgba(59,130,246,.35); color: var(--accent-dk); }
+.step-dot.file { background: rgba(22,163,74,.12); border: 2px solid rgba(22,163,74,.28); color: #15803d; }
+.step-dot.warn { background: rgba(217,119,6,.10); border: 2px solid rgba(217,119,6,.28); color: #b45309; }
+.step-dot.run { background: rgba(59,130,246,.18); border: 2px solid rgba(59,130,246,.42); color: var(--accent); }
+
+.step-line {
+  width: 2px; flex: 1; min-height: 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.04));
+  margin: 4px 0;
+}
+
+/* right content */
+.step-content {
+  flex: 1; padding: 0 0 32px 20px; min-width: 0;
+}
+
+.step-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 8px;
+  font-family: 'Sora', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase;
+}
+.step-tag.github   { background: #161b22; border:1px solid #30363d; color: #8b949e; }
+.step-tag.terminal { background: rgba(59,130,246,.09); border:1px solid rgba(59,130,246,.22); color: var(--accent-dk); }
+.step-tag.file     { background: rgba(22,163,74,.09); border:1px solid rgba(22,163,74,.22); color: #15803d; }
+.step-tag.warn     { background: rgba(217,119,6,.09); border:1px solid rgba(217,119,6,.22); color: #b45309; }
+.step-tag i { font-size: 12px; }
+
+.step-title {
+  font-family: 'Sora', sans-serif; font-size: 15.5px; font-weight: 700;
+  color: var(--headline); letter-spacing: -.2px; margin-bottom: 6px;
+}
+.step-desc {
+  font-size: 13.5px; color: var(--muted); line-height: 1.65; margin-bottom: 12px;
+}
+.step-desc strong { color: var(--nav); font-weight: 600; }
+code.inline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; background: rgba(59,130,246,.08);
+  border: 1px solid rgba(59,130,246,.16); border-radius: 5px;
+  padding: 1px 6px; color: var(--accent-dk);
+}
+
+/* ── GITHUB CARD ── */
+.gh-card {
+  background: var(--gh-bg);
+  border: 1px solid #30363d;
+  border-radius: 14px; overflow: hidden;
+  margin-bottom: 4px;
+}
+.gh-card-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #21262d;
+  background: #161b22;
+}
+.gh-card-header span {
+  font-family: 'Sora', sans-serif; font-size: 11.5px; font-weight: 600;
+  color: #8b949e; letter-spacing: .3px;
+}
+.gh-card-header i { font-size: 14px; color: #8b949e; }
+.gh-steps-list { list-style: none; padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px; }
+.gh-step-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13.5px; color: #c9d1d9; line-height: 1.55;
+}
+.gh-step-item em { font-style: normal; color: #58a6ff; font-weight: 500; }
+.gh-num {
+  width: 20px; height: 20px; flex-shrink: 0;
+  border-radius: 50%; background: #21262d; border: 1px solid #30363d;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 700; color: #8b949e;
+  margin-top: 1px;
+}
+
+/* ── TERMINAL BLOCK ── */
+.term-block {
+  background: var(--term-bg);
+  border: 1px solid var(--term-border);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.18);
+  margin-bottom: 4px;
+}
+.term-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.term-dots { display: flex; gap: 5px; }
+.term-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.term-dots span:nth-child(1) { background: #ff5f57; }
+.term-dots span:nth-child(2) { background: #febc2e; }
+.term-dots span:nth-child(3) { background: #28c840; }
+.term-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,.3);
+}
+.copy-btn {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,.28); font-family: 'Sora', sans-serif;
+  font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 6px; transition: background .15s, color .15s;
+}
+.copy-btn:hover { background: rgba(255,255,255,.07); color: rgba(255,255,255,.7); }
+.copy-btn i { font-size: 13px; }
+pre {
+  padding: 14px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.75;
+  color: #e2e8f0; overflow-x: auto;
+  white-space: pre;
+}
+pre .prompt { color: #4ade80; user-select: none; }
+pre .cmd    { color: #93c5fd; }
+pre .flag   { color: #c084fc; }
+pre .path   { color: #fcd34d; }
+pre .c      { color: #6b7db3; font-style: italic; }
+pre .k      { color: #7dd3fc; }
+pre .s      { color: #86efac; }
+pre .n      { color: #fbbf24; }
+
+/* ── FILE CARD ── */
+.file-card {
+  background: #1a1d27;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.18);
+  margin-bottom: 4px;
+}
+.file-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.file-name {
+  display: flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,.5);
+}
+.file-name i { font-size: 14px; color: rgba(255,255,255,.3); }
+
+/* ── WARN BOX ── */
+.warn-box {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(217,119,6,.07); border: 1px solid rgba(217,119,6,.22);
+  border-radius: 12px; padding: 12px 14px; margin-bottom: 4px;
+}
+.warn-box i { font-size: 16px; color: #b45309; flex-shrink: 0; margin-top: 2px; }
+.warn-box p { font-size: 13px; color: var(--nav); line-height: 1.6; }
+.warn-box p code.inline { font-size: 11.5px; }
+
+/* ── SUCCESS BOX ── */
+.success-box {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(22,163,74,.07); border: 1px solid rgba(22,163,74,.22);
+  border-radius: 12px; padding: 12px 14px; margin-bottom: 4px;
+}
+.success-box i { font-size: 16px; color: #16a34a; flex-shrink: 0; margin-top: 2px; }
+.success-box p { font-size: 13px; color: var(--nav); line-height: 1.6; }
+
+/* ── FOOTER CTA ── */
+.footer-cta {
+  text-align: center; margin-top: 56px;
+}
+.footer-cta p { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+.footer-cta p a { color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(59,130,246,.28); }
+.btn-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.btn-p {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'Sora', sans-serif; font-size: 13.5px; font-weight: 600;
+  color: #fff; background: var(--accent);
+  border: 1.5px solid var(--accent-lt); border-radius: 100px;
+  padding: 12px 26px; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(59,130,246,.28);
+  transition: background .18s, transform .12s;
+}
+.btn-p:hover { background: var(--accent-dk); transform: translateY(-1px); }
+.btn-g {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'Sora', sans-serif; font-size: 13.5px; font-weight: 500;
+  color: var(--nav); background: var(--glass-bg);
+  border: 1px solid rgba(0,0,0,.10); border-radius: 100px;
+  padding: 12px 22px; text-decoration: none;
+  backdrop-filter: blur(8px); transition: background .18s;
+}
+.btn-g:hover { background: rgba(255,255,255,.85); }
+
+/* ── ANIM ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero       { animation: fadeUp .5s  ease both; }
+.video-card { animation: fadeUp .5s  ease .1s both; }
+.video-hint { animation: fadeUp .4s  ease .15s both; }
+.steps-sec  { animation: fadeUp .45s ease .18s both; }
+.footer-cta { animation: fadeUp .4s  ease .25s both; }
+
+@media(max-width:640px){
+  .nav-links-pill { gap:1rem; padding:.625rem 1rem; }
+  .nav-link { font-size:.75rem; }
+  h1 { letter-spacing:-1.5px; }
+  pre { font-size:12px; }
+  .play-btn { width:52px; height:52px; }
+  .play-btn i { font-size:20px; }
+}
+</style>
+</head>
+<body>
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="Assets/faq.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav class="topbar">
+    <div class="logo-container">
+      <svg width="18" height="18" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgb(84,84,84)" d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"/>
+      </svg>
+    </div>
+    <div class="nav-links-pill">
+      <a href="index.html"   class="nav-link">HOME</a>
+      <a href="Compare.html" class="nav-link">COMPARISON</a>
+      <a href="quickstart.html" class="nav-link active">QUICK START</a>
+      <a href="faq.html"      class="nav-link">FAQ</a>
+      <a href="docs.html"     class="nav-link">DOCS</a>
+      <a href="https://github.com/jephersonRD/pc-free" class="nav-link" target="_blank">Support</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow"><i class="ti ti-rocket"></i> Quick Start</div>
+    <h1>Windows 10 in Your<br><em>Browser in 5 Minutes</em></h1>
+    <p class="hero-sub">Watch the video guide, then follow the steps below to spin up your free Windows environment on GitHub Codespaces.</p>
+  </section>
+
+  <!-- VIDEO -->
+  <a class="video-card" href="https://www.youtube.com/watch?v=JiFhZXbz2b8" target="_blank" rel="noopener">
+    <div class="video-thumb"></div>
+    <div class="play-btn"><i class="ti ti-player-play-filled"></i></div>
+    <div class="video-label">
+      <div class="video-label-title">PC-Free — Run Windows 10 Free in Your Browser</div>
+      <div class="video-label-sub">
+        <i class="ti ti-brand-youtube"></i>
+        Watch on YouTube · Full tutorial
+      </div>
+    </div>
+  </a>
+  <p class="video-hint"><i class="ti ti-arrow-down"></i> Then follow the step-by-step guide below</p>
+
+  <!-- STEPS -->
+  <section class="steps-sec">
+    <div class="sec-title"><i class="ti ti-list-check"></i> Step-by-Step Guide</div>
+
+    <div class="steps-track">
+
+      <!-- ═══ STEP 1: GITHUB ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot github"><i class="ti ti-brand-github" style="font-size:16px;"></i></div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag github"><i class="ti ti-brand-github"></i> GitHub</span>
+          <div class="step-title">Create your repository & Codespace</div>
+          <div class="step-desc">Fork the PC-Free repo and launch a maximum-capacity Codespace. <strong>No local setup required.</strong></div>
+          <div class="gh-card">
+            <div class="gh-card-header">
+              <i class="ti ti-brand-github"></i>
+              <span>github.com — Do this in your browser</span>
+            </div>
+            <ul class="gh-steps-list">
+              <li class="gh-step-item"><span class="gh-num">1</span> Go to <em>github.com/jephersonRD/pc-free</em> and click <em>Fork</em> (top right)</li>
+              <li class="gh-step-item"><span class="gh-num">2</span> In your forked repo, click <em>Code → Codespaces → New codespace</em></li>
+              <li class="gh-step-item"><span class="gh-num">3</span> Click <em>Configure and create codespace</em> and select the <em>largest available machine type</em> (4-core or higher)</li>
+              <li class="gh-step-item"><span class="gh-num">4</span> Wait ~2 min for the environment to load — a VS Code window will open in your browser</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 2: CHECK STORAGE ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot terminal">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag terminal"><i class="ti ti-terminal"></i> Terminal</span>
+          <div class="step-title">Check available storage</div>
+          <div class="step-desc">Open the Codespace terminal and run this to see available disk partitions. Pick the one with the most free space.</div>
+          <div class="term-block">
+            <div class="term-header">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-label">codespace ~ bash</span>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="prompt">$</span> <span class="cmd">df</span> <span class="flag">-h</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 3: MKDIR ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot terminal">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag terminal"><i class="ti ti-terminal"></i> Terminal</span>
+          <div class="step-title">Create Docker data folder</div>
+          <div class="step-desc">Create the directory that Docker will use to store all Windows data.</div>
+          <div class="term-block">
+            <div class="term-header">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-label">codespace ~ bash</span>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="prompt">$</span> <span class="cmd">sudo mkdir</span> <span class="flag">-p</span> <span class="path">/tmp/docker-data</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 4: CONFIGURE DOCKER ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot terminal">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag terminal"><i class="ti ti-terminal"></i> Terminal</span>
+          <div class="step-title">Configure Docker daemon</div>
+          <div class="step-desc">Open the daemon config file, paste the JSON below, then save with <code class="inline">Ctrl+O → Enter → Ctrl+X</code>.</div>
+          <div class="term-block">
+            <div class="term-header">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-label">codespace ~ bash</span>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="prompt">$</span> <span class="cmd">sudo nano</span> <span class="path">/etc/docker/daemon.json</span></pre>
+          </div>
+          <div style="margin-top:10px;"></div>
+          <div class="file-card">
+            <div class="file-header">
+              <div class="file-name"><i class="ti ti-file-code"></i> /etc/docker/daemon.json</div>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre>{
+  <span class="k">"data-root"</span>: <span class="s">"/tmp/docker-data"</span>
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 5: RESTART ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot warn"><i class="ti ti-refresh" style="font-size:14px;"></i></div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag warn"><i class="ti ti-refresh"></i> Action required</span>
+          <div class="step-title">Restart your Codespace</div>
+          <div class="step-desc">The Docker daemon config won't take effect until you restart. Go to <strong>Command Palette → Codespaces: Restart</strong>, or close and reopen the Codespace from GitHub.</div>
+          <div class="warn-box">
+            <i class="ti ti-alert-triangle"></i>
+            <p>After restarting, open the terminal again and continue with the next step.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 6: VERIFY DOCKER ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot terminal">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag terminal"><i class="ti ti-terminal"></i> Terminal</span>
+          <div class="step-title">Verify Docker configuration</div>
+          <div class="step-desc">Confirm that <code class="inline">Docker Root Dir</code> shows <code class="inline">/tmp/docker-data</code> in the output.</div>
+          <div class="term-block">
+            <div class="term-header">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-label">codespace ~ bash</span>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="prompt">$</span> <span class="cmd">docker info</span>
+<span class="c">...
+Docker Root Dir: /tmp/docker-data  ← must show this</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 7: CREATE YML ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot file"><i class="ti ti-file-code" style="font-size:14px;"></i></div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag file"><i class="ti ti-file-code"></i> File — Codespace editor</span>
+          <div class="step-title">Create <code class="inline">windows10.yml</code></div>
+          <div class="step-desc">Create this file in the root of your Codespace. You can open it in the VS Code file explorer on the left sidebar.</div>
+          <div class="file-card">
+            <div class="file-header">
+              <div class="file-name"><i class="ti ti-file-code"></i> windows10.yml</div>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="c"># Before running docker-compose up, execute:</span>
+<span class="c"># bash check_github_follow.sh || exit 1</span>
+<span class="c"># If you don't follow https://github.com/jephersonRD</span>
+<span class="c"># the environment will NOT start.</span>
+
+<span class="k">services:</span>
+  <span class="k">windows:</span>
+    <span class="k">image:</span> <span class="s">dockurr/windows</span>
+    <span class="k">container_name:</span> <span class="s">windows</span>
+    <span class="k">environment:</span>
+      <span class="k">VERSION:</span>  <span class="s">"10"</span>
+      <span class="k">USERNAME:</span> <span class="n">${WINDOWS_USERNAME}</span>
+      <span class="k">PASSWORD:</span> <span class="n">${WINDOWS_PASSWORD}</span>
+      <span class="k">RAM_SIZE:</span> <span class="s">"10G"</span>
+      <span class="k">CPU_CORES:</span> <span class="s">"4"</span>
+    <span class="k">cap_add:</span>
+      - <span class="s">NET_ADMIN</span>
+    <span class="k">ports:</span>
+      - <span class="s">"8006:8006"</span>
+      - <span class="s">"3389:3389/tcp"</span>
+    <span class="k">volumes:</span>
+      - <span class="s">/tmp/docker-data:/mnt/disco1</span>
+      - <span class="s">windows-data:/mnt/windows-data</span>
+    <span class="k">devices:</span>
+      - <span class="s">"/dev/kvm:/dev/kvm"</span>
+      - <span class="s">"/dev/net/tun:/dev/net/tun"</span>
+    <span class="k">stop_grace_period:</span> <span class="s">2m</span>
+    <span class="k">restart:</span> <span class="s">always</span>
+
+<span class="k">volumes:</span>
+  <span class="k">windows-data:</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 8: CREATE .ENV ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot file"><i class="ti ti-key" style="font-size:14px;"></i></div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag file"><i class="ti ti-key"></i> File — Codespace editor</span>
+          <div class="step-title">Create <code class="inline">.env</code> with your credentials</div>
+          <div class="step-desc">Create a <code class="inline">.env</code> file in the same folder. Replace the placeholder values with your actual username and password for Windows.</div>
+          <div class="file-card">
+            <div class="file-header">
+              <div class="file-name"><i class="ti ti-key"></i> .env</div>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="k">WINDOWS_USERNAME</span>=<span class="s">YourUsername</span>
+<span class="k">WINDOWS_PASSWORD</span>=<span class="s">YourPassword</span>
+<span class="k">GITHUB_USER</span>=<span class="s">YourGitHubUsername</span></pre>
+          </div>
+          <div style="margin-top:10px;"></div>
+          <div class="warn-box">
+            <i class="ti ti-alert-triangle"></i>
+            <p><strong>Never commit .env to git.</strong> Add it to your <code class="inline">.gitignore</code> right now:</p>
+          </div>
+          <div class="term-block" style="margin-top:8px;">
+            <div class="term-header">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-label">codespace ~ bash</span>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="prompt">$</span> <span class="cmd">echo</span> <span class="s">".env"</span> >> <span class="path">.gitignore</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 9: RUN ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot run"><i class="ti ti-player-play-filled" style="font-size:14px;"></i></div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag terminal"><i class="ti ti-rocket"></i> Terminal · Launch</span>
+          <div class="step-title">Start Windows 10!</div>
+          <div class="step-desc">Run Docker Compose. The first boot downloads the Windows image — <strong>takes 5–10 minutes</strong>. Subsequent starts take ~2–3 min.</div>
+          <div class="term-block">
+            <div class="term-header">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-label">codespace ~ bash</span>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="prompt">$</span> <span class="cmd">docker-compose</span> <span class="flag">-f</span> <span class="path">windows10.yml</span> up</pre>
+          </div>
+          <div style="margin-top:10px;"></div>
+          <div class="success-box">
+            <i class="ti ti-circle-check"></i>
+            <p>Once running, go to the <strong>Ports</strong> tab in Codespace → find port <strong>8006</strong> → set visibility to <strong>Public</strong> → click the globe icon to open Windows in your browser.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STEP 10: STOP ═══ -->
+      <div class="step-row">
+        <div class="step-timeline">
+          <div class="step-dot terminal"><i class="ti ti-power" style="font-size:14px;"></i></div>
+        </div>
+        <div class="step-content">
+          <span class="step-tag terminal"><i class="ti ti-terminal"></i> Terminal</span>
+          <div class="step-title">Shut down Windows</div>
+          <div class="step-desc">When you're done, gracefully stop the container. Your data is preserved in Docker volumes and will be there on the next start.</div>
+          <div class="term-block">
+            <div class="term-header">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-label">codespace ~ bash</span>
+              <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+            </div>
+            <pre><span class="prompt">$</span> <span class="cmd">docker stop</span> windows</pre>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /steps-track -->
+  </section>
+
+  <!-- FOOTER CTA -->
+  <div class="footer-cta">
+    <p>Running into an issue? Check the <a href="faq.html">FAQ</a> or the <a href="docs.html">full documentation</a>.</p>
+    <div class="btn-row">
+      <a class="btn-p" href="https://github.com/jephersonRD/pc-free" target="_blank"><i class="ti ti-brand-github"></i> Fork on GitHub</a>
+      <a class="btn-g" href="faq.html"><i class="ti ti-help-circle"></i> FAQ</a>
+      <a class="btn-g" href="docs.html"><i class="ti ti-book-2"></i> Full Docs</a>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+function copyCode(btn) {
+  const block = btn.closest('.term-block, .file-card');
+  const pre = block.querySelector('pre');
+  const text = pre.innerText.replace(/^\$\s*/gm, '').replace(/^\.{3}.*$/gm, '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+    btn.style.color = '#4ade80';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 1800);
+  });
+}
+</script>
+</body>
+</html>

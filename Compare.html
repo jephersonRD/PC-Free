@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #f0f0ee;
+    --pill:      #EDEDED;
+    --headline:  #111827;
+    --nav:       #404040;
+    --nav-hover: #111827;
+    --muted:     #9ca3af;
+    --accent:    #3b82f6;
+    --accent-lt: #60a5fa;
+    --accent-dk: #2563eb;
+    --logo:      rgb(84,84,84);
+    --glass-bg:     rgba(255,255,255,0.4);
+    --glass-border: rgba(255,255,255,0.6);
+    --glass-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    --row-hover:    rgba(59,130,246,0.06);
+    --radius-xl:    36px;
+  }
+
+  html {
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    font-family: "DM Sans", sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 24px 80px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  /* ── NAVBAR FIXED ── */
+  .hero-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1rem;
+    gap: 0.5rem;
+    z-index: 100;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-nav.hidden {
+    transform: translateY(-100%);
+  }
+
+  @media (min-width: 640px) {
+    .hero-nav {
+      padding: 1.5rem 2rem;
+      gap: 0.75rem;
+    }
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    background-color: #EDEDED;
+    flex-shrink: 0;
+  }
+
+  .nav-links-pill {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 0.75rem 2rem;
+    border-radius: 0.75rem;
+    background-color: #EDEDED;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #404040;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .nav-link:hover  { color: #111827; }
+
+  /* ── HERO TITLE ── */
+  .hero {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    margin-bottom: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(59,130,246,0.12);
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 100px;
+    padding: 5px 14px 5px 10px;
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.3px;
+    margin-bottom: 20px;
+  }
+  .hero-badge i { font-size: 14px; }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(38px, 5.5vw, 64px);
+    font-weight: 700;
+    color: var(--headline);
+    letter-spacing: -2px;
+    line-height: 1.08;
+    margin-bottom: 14px;
+  }
+  h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-lt) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 400;
+    max-width: 440px;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  /* ── TABLE CARD ── */
+  .table-wrap {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1020px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow);
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead tr {
+    background: linear-gradient(135deg, var(--headline) 0%, #1e293b 100%);
+  }
+  thead th {
+    padding: 22px 24px;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-align: left;
+    color: rgba(255,255,255,0.55);
+  }
+  thead th:first-child { color: rgba(255,255,255,0.35); width: 200px; }
+  thead th.highlight { color: #fff; position: relative; }
+  thead th.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20px; right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-lt));
+    border-radius: 2px 2px 0 0;
+  }
+
+  .th-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .th-inner i { font-size: 16px; opacity: 0.8; }
+  .badge-best {
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 100px;
+    padding: 2px 8px;
+    letter-spacing: 0.4px;
+    margin-left: 4px;
+  }
+
+  tbody tr {
+    border-top: 1px solid rgba(0,0,0,0.055);
+    transition: background 0.15s;
+  }
+  tbody tr:hover { background: var(--row-hover); }
+
+  tbody td {
+    padding: 20px 24px;
+    font-size: 14.5px;
+    color: var(--nav);
+    vertical-align: middle;
+  }
+  tbody td:first-child {
+    font-family: 'Sora', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--headline);
+    white-space: nowrap;
+  }
+
+  .feat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .feat-icon {
+    width: 32px; height: 32px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .feat-icon i { font-size: 15px; color: var(--logo); }
+
+  .cell {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .cell i { font-size: 17px; flex-shrink: 0; }
+
+  .pill-val {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 100px;
+    padding: 3px 10px 3px 7px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .pill-val.green  { background: rgba(22,163,74,0.1);  border-color: rgba(22,163,74,0.2);  color: #15803d; }
+  .pill-val.red    { background: rgba(220,38,38,0.08);  border-color: rgba(220,38,38,0.2);  color: #b91c1c; }
+  .pill-val.amber  { background: rgba(217,119,6,0.08);  border-color: rgba(217,119,6,0.2);  color: #b45309; }
+  .pill-val.blue   { background: rgba(59,130,246,0.1);  border-color: rgba(59,130,246,0.25); color: var(--accent-dk); }
+  .pill-val.gray   { background: rgba(0,0,0,0.05);      border-color: rgba(0,0,0,0.1);      color: var(--nav); }
+
+  tbody td.hl {
+    background: rgba(59,130,246,0.04);
+    border-left: 1px solid rgba(59,130,246,0.1);
+    border-right: 1px solid rgba(59,130,246,0.1);
+  }
+
+  .table-footer {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .btn-primary {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: 1.5px solid var(--accent-lt);
+    border-radius: 100px;
+    padding: 12px 28px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.18s, transform 0.12s;
+    box-shadow: 0 4px 14px rgba(59,130,246,0.28);
+  }
+  .btn-primary:hover { background: var(--accent-dk); transform: translateY(-1px); }
+  .btn-ghost {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--nav);
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 100px;
+    padding: 12px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    backdrop-filter: blur(10px);
+    transition: background 0.18s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.7); color: var(--nav-hover); }
+
+  @media (max-width: 640px) {
+    .nav-links-pill { gap: 1rem; padding: 0.625rem 1rem; }
+    .nav-link { font-size: 0.75rem; }
+  }
+
+  @media (max-width: 700px) {
+    thead th, tbody td { padding: 14px 14px; font-size: 13px; }
+    .feat-icon { display: none; }
+  }
+</style>
+</head>
+<body>
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="Assets/compare.mp4" type="video/mp4">
+  </video>
+
+  <nav class="hero-nav">
+    <div class="logo-container">
+      <svg width="18" height="18" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgb(84, 84, 84)" d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"/>
+      </svg>
+    </div>
+    <div class="nav-links-pill">
+      <a href="index.html" class="nav-link">HOME</a>
+      <a href="Compare.html" class="nav-link active">COMPARISON</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="docs.html" class="nav-link">DOCS</a>
+      <a href="https://github.com/jephersonRD/pc-free" class="nav-link" target="_blank">Support</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">
+      <i class="ti ti-chart-bar"></i>
+      Honest comparison
+    </div>
+    <h1>How does <br><span>PC-Free?</span> compare?</h1>
+    <p class="hero-sub">We evaluate cost, speed, accessibility and openness against the leading market alternatives.</p>
+  </section>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th class="highlight">
+            <div class="th-inner">
+              <i class="ti ti-bolt"></i>
+              PC-Free
+              <span class="badge-best">Mejor</span>
+            </div>
+          </th>
+          <th>
+            <div class="th-inner">
+              <i class="ti ti-brand-azure"></i>
+              Azure Virtual Desktop
+            </div>
+          </th>
+          <th>
+            <div class="th-inner">
+              <i class="ti ti-cloud"></i>
+              AWS WorkSpaces
+            </div>
+          </th>
+          <th>
+            <div class="th-inner">
+              <i class="ti ti-device-desktop"></i>
+              VM Local
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="feat">
+              <div class="feat-icon"><i class="ti ti-coin"></i></div>
+              Monthly cost
+            </div>
+          </td>
+          <td class="hl"><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>$0 — Gratis</span></div></td>
+          <td><div class="cell"><span class="pill-val red"><i class="ti ti-circle-x"></i>$31 – 100+</span></div></td>
+          <td><div class="cell"><span class="pill-val red"><i class="ti ti-circle-x"></i>$25 – 75+</span></div></td>
+          <td><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>$0 — Gratis</span></div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="feat">
+              <div class="feat-icon"><i class="ti ti-clock"></i></div>
+              Setup time
+            </div>
+          </td>
+          <td class="hl"><div class="cell"><span class="pill-val blue"><i class="ti ti-bolt"></i>5 minutes</span></div></td>
+          <td><div class="cell"><span class="pill-val gray"><i class="ti ti-clock-hour-4"></i>30+ minutes</span></div></td>
+          <td><div class="cell"><span class="pill-val gray"><i class="ti ti-clock-hour-4"></i>30+ minutes</span></div></td>
+          <td><div class="cell"><span class="pill-val gray"><i class="ti ti-clock-hour-4"></i>15 – 30 min</span></div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="feat">
+              <div class="feat-icon"><i class="ti ti-cpu"></i></div>
+              Required hardware
+            </div>
+          </td>
+          <td class="hl"><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>None</span></div></td>
+          <td><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>None</span></div></td>
+          <td><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>None</span></div></td>
+          <td><div class="cell"><span class="pill-val red"><i class="ti ti-circle-x"></i>Powerful PC</span></div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="feat">
+              <div class="feat-icon"><i class="ti ti-browser"></i></div>
+              Browser access
+            </div>
+          </td>
+          <td class="hl"><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>Yes</span></div></td>
+          <td><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>Yes</span></div></td>
+          <td><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>Yes</span></div></td>
+          <td><div class="cell"><span class="pill-val amber"><i class="ti ti-alert-triangle"></i>Limited</span></div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="feat">
+              <div class="feat-icon"><i class="ti ti-source-code"></i></div>
+              Open Source
+            </div>
+          </td>
+          <td class="hl"><div class="cell"><span class="pill-val green"><i class="ti ti-circle-check"></i>Yes</span></div></td>
+          <td><div class="cell"><span class="pill-val red"><i class="ti ti-circle-x"></i>No</span></div></td>
+          <td><div class="cell"><span class="pill-val red"><i class="ti ti-circle-x"></i>No</span></div></td>
+          <td><div class="cell"><span class="pill-val amber"><i class="ti ti-alert-triangle"></i>Parcial</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-footer">
+    <a class="btn-primary" href="quickstart.html">
+      <i class="ti ti-rocket"></i>
+      Start free
+    </a>
+    <a class="btn-ghost" href="docs.html">
+      <i class="ti ti-book-2"></i>
+      View documentation
+    </a>
+  </div>
+
+<script>
+  let lastScroll = 0;
+  const nav = document.querySelector('.hero-nav');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      nav.classList.add('hidden');
+    } else {
+      nav.classList.remove('hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+</script>
+
+</body>
+</html>

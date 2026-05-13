@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC-Free — FAQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f0f0ee;
+  --pill:      #EDEDED;
+  --headline:  #111827;
+  --nav:       #404040;
+  --nav-hover: #111827;
+  --muted:     #9ca3af;
+  --accent:    #3b82f6;
+  --accent-lt: #60a5fa;
+  --accent-dk: #2563eb;
+  --logo:      rgb(84,84,84);
+  --glass-bg:     rgba(255,255,255,0.4);
+  --glass-border: rgba(255,255,255,0.6);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 96px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem;
+  gap: 0.5rem;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+.hero-nav.hidden { transform: translateY(-100%); }
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background-color: #EDEDED;
+  flex-shrink: 0;
+}
+
+.nav-links-pill {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 0.75rem;
+  background-color: #EDEDED;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #404040;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.nav-link:hover { color: #111827; }
+
+.page-hero {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 64px;
+  max-width: 620px;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 100px;
+  padding: 5px 14px 5px 10px;
+  font-family: 'Sora', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+  margin-bottom: 20px;
+}
+.eyebrow i { font-size: 14px; }
+
+h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(38px, 5.5vw, 64px);
+  font-weight: 700;
+  color: var(--headline);
+  letter-spacing: -2px;
+  line-height: 1.08;
+  margin-bottom: 14px;
+}
+h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-lt) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.page-sub {
+  font-size: 16px;
+  color: var(--muted);
+  font-weight: 400;
+  max-width: 440px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.faq-list {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.faq-item:hover { box-shadow: var(--glass-shadow); }
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  opacity: 0.6;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.faq-question {
+  flex: 1;
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--headline);
+  line-height: 1.4;
+}
+
+.faq-chevron {
+  color: var(--muted);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.faq-chevron i { font-size: 18px; }
+
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.faq-item.open .faq-body { max-height: 400px; }
+
+.faq-body-inner {
+  padding: 0 28px 24px;
+  padding-left: 68px;
+}
+
+.faq-answer {
+  font-size: 14.5px;
+  color: var(--nav);
+  line-height: 1.7;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.tag i { font-size: 12px; }
+.tag.green  { background: rgba(22,163,74,0.1);  color: #15803d; }
+.tag.amber  { background: rgba(217,119,6,0.1);  color: #b45309; }
+.tag.blue   { background: rgba(59,130,246,0.1); color: var(--accent-dk); }
+
+@media (max-width: 640px) {
+  .hero-nav { padding: 1rem; gap: 0.5rem; }
+  .nav-links-pill { gap: 1rem; padding: 0.625rem 1rem; }
+  .nav-link { font-size: 0.75rem; }
+  .page-hero { padding-top: 100px; }
+  .faq-trigger { padding: 20px; }
+  .faq-body-inner { padding-left: 20px; padding-right: 20px; padding-bottom: 20px; }
+}
+</style>
+</head>
+<body>
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="Assets/faq.mp4" type="video/mp4">
+  </video>
+
+  <nav class="hero-nav">
+    <div class="logo-container">
+      <svg width="18" height="18" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgb(84, 84, 84)" d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"/>
+      </svg>
+    </div>
+    <div class="nav-links-pill">
+      <a href="index.html" class="nav-link">HOME</a>
+      <a href="Compare.html" class="nav-link">COMPARISON</a>
+      <a href="faq.html" class="nav-link active">FAQ</a>
+      <a href="docs.html" class="nav-link">DOCS</a>
+      <a href="https://github.com/jephersonRD/pc-free" class="nav-link" target="_blank">Support</a>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="eyebrow">
+      <i class="ti ti-help-circle"></i>
+      Support
+    </div>
+    <h1>Got <em>Questions?</em><br>We Have Answers.</h1>
+    <p class="page-sub">Everything you need to know about running Windows in your browser with PC-Free.</p>
+  </section>
+
+  <div class="faq-list" role="list">
+    <div class="faq-item" role="listitem">
+      <button class="faq-trigger" aria-expanded="false">
+        <span class="faq-num">01</span>
+        <span class="faq-question">How long does Windows take to boot?</span>
+        <span class="faq-chevron"><i class="ti ti-chevron-down"></i></span>
+      </button>
+      <div class="faq-body" role="region">
+        <div class="faq-body-inner">
+          <div class="faq-answer">
+            <span class="tag amber"><i class="ti ti-clock"></i> First boot</span> &nbsp;
+            Takes <strong>5 – 10 minutes</strong> while downloading the Windows image from Microsoft's servers. This only happens once.<br><br>
+            <span class="tag green"><i class="ti ti-refresh"></i> Subsequent boots</span> &nbsp;
+            Once cached, your environment is up in <strong>2 – 3 minutes</strong>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-trigger" aria-expanded="false">
+        <span class="faq-num">02</span>
+        <span class="faq-question">Is it really free? What's the catch?</span>
+        <span class="faq-chevron"><i class="ti ti-chevron-down"></i></span>
+      </button>
+      <div class="faq-body" role="region">
+        <div class="faq-body-inner">
+          <div class="faq-answer">
+            <span class="tag green"><i class="ti ti-circle-check"></i> Free tier</span> &nbsp;
+            Yes! GitHub provides <strong>120 hours/month</strong> of Codespaces for free. This is enough for light daily use.<br><br>
+            <span class="tag blue"><i class="ti ti-star"></i> Paid plans</span> &nbsp;
+            If you need more power or longer sessions, upgrade to a paid Codespaces plan — PC-Free just runs on top of it.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-trigger" aria-expanded="false">
+        <span class="faq-num">03</span>
+        <span class="faq-question">Can I use my own keyboard and mouse?</span>
+        <span class="faq-chevron"><i class="ti ti-chevron-down"></i></span>
+      </button>
+      <div class="faq-body" role="region">
+        <div class="faq-body-inner">
+          <div class="faq-answer">
+            Yes — fully. PC-Free exposes a real RDP (Remote Desktop) session, so your keyboard layout, shortcuts, and peripherals work exactly as they would on a local Windows machine.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-trigger" aria-expanded="false">
+        <span class="faq-num">04</span>
+        <span class="faq-question">Does it work on mobile / Chromebooks?</span>
+        <span class="faq-chevron"><i class="ti ti-chevron-down"></i></span>
+      </button>
+      <div class="faq-body" role="region">
+        <div class="faq-body-inner">
+          <div class="faq-answer">
+            Yes. Since everything runs in the browser, any device with a modern browser works — including Android, iPad, and ChromeOS. For the best experience, use landscape mode.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-trigger" aria-expanded="false">
+        <span class="faq-num">05</span>
+        <span class="faq-question">Is my data safe?</span>
+        <span class="faq-chevron"><i class="ti ti-chevron-down"></i></span>
+      </button>
+      <div class="faq-body" role="region">
+        <div class="faq-body-inner">
+          <div class="faq-answer">
+            Your files live on GitHub's infrastructure — not on our servers. We never see, store, or touch your data. GitHub Codespaces sessions can be encrypted at rest and in transit.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-trigger" aria-expanded="false">
+        <span class="faq-num">06</span>
+        <span class="faq-question">What OS does PC-Free itself run on?</span>
+        <span class="faq-chevron"><i class="ti ti-chevron-down"></i></span>
+      </button>
+      <div class="faq-body" role="region">
+        <div class="faq-body-inner">
+          <div class="faq-answer">
+            PC-Free is just a web interface. It runs entirely in the browser. The "heavy lifting" (Windows, Docker, RDP) happens inside a GitHub Codespace running Ubuntu.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let lastScroll = 0;
+    const nav = document.querySelector('.hero-nav');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        nav.classList.add('hidden');
+      } else {
+        nav.classList.remove('hidden');
+      }
+      lastScroll = currentScroll;
+    });
+
+    document.querySelectorAll('.faq-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        document.querySelectorAll('.faq-trigger').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
