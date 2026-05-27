@@ -46,44 +46,7 @@ PC-Free is an open-source project that lets you run Windows 10 directly in your 
 
 ---
 
-## Features
 
-### Cloud Windows Environment
-
-Run a full Windows 10 desktop environment in your browser without downloading or installing anything locally. Perfect for developers, students, and professionals who need Windows access on Mac, Linux, or Chromebook.
-
-### Docker-Powered Performance
-
-Leverages Docker containers for fast deployment, isolated execution, and easy management. Your Windows environment is containerized for security and portability.
-
-### GitHub Codespaces Integration
-
-Deploy instantly to GitHub Codespaces with generous free tier (60 hours/month). No credit card required for basic usage.
-
-### Complete Feature Set
-
-- Full Windows 10 desktop experience
-- Web-based VNC access (noVNC)
-- RDP support for native remote desktop
-- Persistent storage volumes
-- Customizable RAM and CPU allocation
-- Windows 10 and 11 support
-- Secure, private environment
-
----
-
-## Use Cases - When to Use PC-Free
-
-| Use Case | Description | Ideal For |
-|----------|-------------|-----------|
-| **Remote Work** | Access Windows applications from Mac, Linux, or mobile devices | Remote workers, digital nomads |
-| **Development & Testing** | Test Windows-specific applications and software | Developers, QA testers |
-| **Education & Learning** | Learn Windows administration without installing locally | Students, IT learners |
-| **Cross-Platform Work** | Run Windows-only software on non-Windows devices | Mac users, Linux users |
-| **Secure Testing** | Test untrusted software in isolated container | Security researchers, IT admins |
-| **Temporary Access** | Quick Windows access without permanent installation | Consultants, freelancers |
-
----
 
 ## Comparison: PC-Free vs Alternatives
 
