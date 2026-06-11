@@ -4,7 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-adsense-account" content="ca-pub-9208880316800976">
-<title>PC-Free — Quick Start</title>
+<title>Quick Start Guide | Free Windows 10 in Browser — PC-Free</title>
+<meta name="description" content="Step-by-step guide to run Windows 10 free in your browser. Set up in 5 minutes with GitHub Codespaces and Docker. No installation required.">
+<meta name="keywords" content="windows 10 browser free, cloud pc setup, github codespaces windows, run windows online, free cloud pc guide">
+<link rel="canonical" href="https://jephersonrd.github.io/PC-Free/quickstart.html">
+<meta property="og:title" content="Quick Start Guide — Free Windows 10 in Browser | PC-Free">
+<meta property="og:description" content="Step-by-step guide to run Windows 10 free in your browser. Set up in 5 minutes with GitHub Codespaces and Docker.">
+<meta property="og:image" content="https://jephersonrd.github.io/PC-Free/images/windows10-desktop.png">
+<meta property="og:url" content="https://jephersonrd.github.io/PC-Free/quickstart.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quick Start Guide — Free Windows 10 in Browser | PC-Free">
+<meta name="twitter:description" content="Step-by-step guide to run Windows 10 free in your browser. Set up in 5 minutes.">
+<meta name="twitter:image" content="https://jephersonrd.github.io/PC-Free/images/windows10-desktop.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
@@ -435,11 +447,6 @@ pre .n      { color: #fbbf24; }
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9208880316800976" crossorigin="anonymous"></script>
 </head>
 <body>
-  <video autoplay muted loop playsinline class="bg-video">
-    <source src="Assets/faq.mp4" type="video/mp4">
-  </video>
-  <div class="video-overlay"></div>
-
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
 
@@ -451,14 +458,19 @@ pre .n      { color: #fbbf24; }
       </svg>
     </div>
     <div class="nav-links-pill">
-      <a href="index.html"   class="nav-link">HOME</a>
-      <a href="Compare.html" class="nav-link">COMPARISON</a>
+      <a href="index.html"     class="nav-link">HOME</a>
+      <a href="Compare.html"   class="nav-link">COMPARISON</a>
       <a href="quickstart.html" class="nav-link active">QUICK START</a>
-      <a href="faq.html"      class="nav-link">FAQ</a>
-      <a href="docs.html"     class="nav-link">DOCS</a>
-      <a href="https://github.com/jephersonRD/pc-free" class="nav-link" target="_blank">Support</a>
+      <a href="faq.html"       class="nav-link">FAQ</a>
+      <a href="docs.html"      class="nav-link">DOCS</a>
+      <a href="https://github.com/jephersonRD/pc-free" class="nav-link" target="_blank">GITHUB</a>
     </div>
   </nav>
+
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="Assets/faq.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
 
   <div class="page">
 
@@ -784,6 +796,20 @@ function copyCode(btn) {
     btn.style.color = '#4ade80';
     setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 1800);
   });
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Run Windows 10 Free in Browser",
+  "description": "Step-by-step guide to run Windows 10 free in your browser using GitHub Codespaces and Docker",
+  "step": [
+    {"@type": "HowToStep", "name": "Create GitHub Codespace"},
+    {"@type": "HowToStep", "name": "Configure Docker storage"},
+    {"@type": "HowToStep", "name": "Launch Windows 10 container"}
+  ]
 }
 </script>
 </body>

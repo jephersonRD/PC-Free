@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jephersonrd.github.io/PC-Free/sitemap.xml
