@@ -129,19 +129,16 @@ Asegúrate de que `Docker Root Dir` sea `/tmp/docker-data`.
 ## 🧱 Archivo `windows10.yml`
 
 ```yaml
-# Antes de ejecutar docker-compose up, ejecuta:
-# bash check_github_follow.sh || exit 1
-# Si no sigues a https://github.com/jephersonRD, el entorno no se iniciará.
 services:
   windows:
     image: dockurr/windows
     container_name: windows
     environment:
-      VERSION: "10"
+      VERSION: "https://archive.org/download/windows-7-iso-/Win7Pro32bit.iso"
       USERNAME: ${WINDOWS_USERNAME}
       PASSWORD: ${WINDOWS_PASSWORD}
-      RAM_SIZE: "10G"
-      CPU_CORES: "4"
+      RAM_SIZE: "6G"
+      CPU_CORES: "2"
     cap_add:
       - NET_ADMIN
     ports:
@@ -150,6 +147,7 @@ services:
     volumes:
       - /tmp/docker-data:/mnt/disco1
       - windows-data:/mnt/windows-data
+      - ./chrome-install:/oem
     devices:
       - "/dev/kvm:/dev/kvm"
       - "/dev/net/tun:/dev/net/tun"
@@ -160,9 +158,17 @@ volumes:
   windows-data:
 ```
 
+The installer downloads the latest Chrome build compatible with the Windows image during setup.
+
 ---
 
 ## 🗝️ Archivo `.env`
+
+Copia la plantilla y reemplaza los valores de ejemplo:
+
+```bash
+cp .env.example .env
+```
 
 ```ini
 WINDOWS_USERNAME=YourUsername
@@ -172,8 +178,8 @@ GITHUB_USER=YourGitHubUsername
 
 ### 🛑 Agrega este archivo a tu `.gitignore`:
 
-```bash
-echo ".env" >> .gitignore
+```gitignore
+.env
 ```
 
 ---
@@ -269,9 +275,9 @@ Edit `windows10.yml` to adjust resources:
 
 ```yaml
 environment:
-  VERSION: "10"              # Windows version (10 or 11)
-  RAM_SIZE: "10G"           # RAM allocation
-  CPU_CORES: "4"            # CPU core count
+  VERSION: "https://archive.org/download/windows-7-iso-/Win7Pro32bit.iso" # Custom Windows 7 ISO
+  RAM_SIZE: "6G"            # RAM allocation
+  CPU_CORES: "2"             # CPU core count
   DISK_SIZE: "64G"          # Virtual disk size
   USERNAME: ${WINDOWS_USERNAME}
   PASSWORD: ${WINDOWS_PASSWORD}
@@ -283,7 +289,7 @@ Change Windows version in environment:
 
 ```yaml
 environment:
-  VERSION: "11"  # Windows 11
+  VERSION: "https://archive.org/download/windows-7-iso-/Win7Pro32bit.iso"  # Custom Windows 7 ISO
 ```
 
 ### Enable RDP Access

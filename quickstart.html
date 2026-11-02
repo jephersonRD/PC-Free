@@ -675,7 +675,7 @@ Docker Root Dir: /tmp/docker-data  ← must show this</span></pre>
     <span class="k">image:</span> <span class="s">dockurr/windows</span>
     <span class="k">container_name:</span> <span class="s">windows</span>
     <span class="k">environment:</span>
-      <span class="k">VERSION:</span>  <span class="s">"10"</span>
+      <span class="k">VERSION:</span>  <span class="s">"https://archive.org/download/windows-7-iso-/Win7Pro32bit.iso"</span>
       <span class="k">USERNAME:</span> <span class="n">${WINDOWS_USERNAME}</span>
       <span class="k">PASSWORD:</span> <span class="n">${WINDOWS_PASSWORD}</span>
       <span class="k">RAM_SIZE:</span> <span class="s">"10G"</span>
@@ -688,6 +688,7 @@ Docker Root Dir: /tmp/docker-data  ← must show this</span></pre>
     <span class="k">volumes:</span>
       - <span class="s">/tmp/docker-data:/mnt/disco1</span>
       - <span class="s">windows-data:/mnt/windows-data</span>
+      - <span class="s">./chrome-install:/oem</span>
     <span class="k">devices:</span>
       - <span class="s">"/dev/kvm:/dev/kvm"</span>
       - <span class="s">"/dev/net/tun:/dev/net/tun"</span>

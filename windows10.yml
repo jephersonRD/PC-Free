@@ -1,0 +1,27 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "https://archive.org/download/windows-7-iso-/Win7Pro32bit.iso"
+      USERNAME: ${WINDOWS_USERNAME}
+      PASSWORD: ${WINDOWS_PASSWORD}
+      RAM_SIZE: "6G"
+      CPU_CORES: "2"
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "8006:8006"
+      - "3389:3389/tcp"
+    volumes:
+      - /tmp/docker-data:/mnt/disco1
+      - windows-data:/mnt/windows-data
+      - ./chrome-install:/oem
+    devices:
+      - "/dev/kvm:/dev/kvm"
+      - "/dev/net/tun:/dev/net/tun"
+    stop_grace_period: 2m
+    restart: always
+
+volumes:
+  windows-data:
