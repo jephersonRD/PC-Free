@@ -1,0 +1,31 @@
+# Before running docker-compose up, execute:
+# bash check_github_follow.sh || exit 1
+# If you don't follow https://github.com/jephersonRD
+# the environment will NOT start.
+
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "10"
+      USERNAME: ${WINDOWS_USERNAME}
+      PASSWORD: ${WINDOWS_PASSWORD}
+      RAM_SIZE: "10G"
+      CPU_CORES: "4"
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "8006:8006"
+      - "3389:3389/tcp"
+    volumes:
+      - /tmp/docker-data:/mnt/disco1
+      - windows-data:/mnt/windows-data
+    devices:
+      - "/dev/kvm:/dev/kvm"
+      - "/dev/net/tun:/dev/net/tun"
+    stop_grace_period: 2m
+    restart: always
+
+volumes:
+  windows-data:
