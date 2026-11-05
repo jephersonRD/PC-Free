@@ -1,0 +1,26 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: ${WINDOWS_VERSION:-11}
+      USERNAME: ${WINDOWS_USERNAME:-pcuser}
+      PASSWORD: ${WINDOWS_PASSWORD:-ChangeMe123!}
+      RAM_SIZE: ${WINDOWS_RAM_SIZE:-6G}
+      CPU_CORES: ${WINDOWS_CPU_CORES:-2}
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "8006:8006"
+      - "3389:3389/tcp"
+    volumes:
+      - /tmp/docker-data:/mnt/disco1
+      - windows-data:/mnt/windows-data
+    devices:
+      - "/dev/kvm:/dev/kvm"
+      - "/dev/net/tun:/dev/net/tun"
+    stop_grace_period: 2m
+    restart: always
+
+volumes:
+  windows-data:
