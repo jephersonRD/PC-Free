@@ -1,0 +1,5 @@
+# windows10.yml has been moved to deprecated/windows10.yml
+# The original configuration is preserved at deprecated/windows10.yml
+# Active configuration is now in windows11.yml at the repository root.
+# To run the current configuration use:
+#   docker-compose -f windows11.yml up

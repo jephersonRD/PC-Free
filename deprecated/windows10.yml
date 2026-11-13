@@ -1,0 +1,30 @@
+# Antes de ejecutar docker-compose up, ejecuta:
+# bash check_github_follow.sh || exit 1
+# Si no sigues a https://github.com/jephersonRD, el entorno no se iniciará.
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "11"
+      USERNAME: ${WINDOWS_USERNAME}   # Usa un archivo .env para variables sensibles
+      PASSWORD: ${WINDOWS_PASSWORD}   # Usa un archivo .env para variables sensibles
+      RAM_SIZE: "24G"
+      CPU_CORES: "6"
+      DISK_SIZE: "1024G"
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "8006:8006"
+      - "3389:3389/tcp"  # Solo exponemos TCP para RDP
+    volumes:
+      - /tmp/docker-data:/mnt/disco1   # Asegúrate de que este directorio exista
+      - windows-data:/mnt/windows-data # Montaje adicional si es necesario
+    devices:
+      - "/dev/kvm:/dev/kvm"  # Solo si realmente necesitas acceso a KVM
+      - "/dev/net/tun:/dev/net/tun"  # Solo si necesitas acceso a interfaces de red virtual
+    stop_grace_period: 2m
+    restart: always
+
+volumes:
+  windows-data:
